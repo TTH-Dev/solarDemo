@@ -24,7 +24,16 @@ const transporter = nodemailer.createTransport({
 });
 
 
-
+// const transporter = nodemailer.createTransport({
+//   service: "gmail",
+//   auth: {
+//     type: "OAuth2",
+//     user: "lejonavr@gmail.com", // Ensure the full email address is used
+//     clientId: "372164263040-dk9lhra2la3are24ru93f3mbph5ggckq.apps.googleusercontent.com",
+//     clientSecret: "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",
+//     refreshToken: "1//04Yh2nU7oobi2CgYIARAAGAQSNwF-L9IrhFDcj6imRKN-6zEIpT_P7DGIUfNHX4uDPK9mLxDZideWRAVRSX2PVLCa-zV0_WNdpfY",
+//   },
+// });
 
 // Define a function to send an email
 const sendEmail = async (mailOptions) => {

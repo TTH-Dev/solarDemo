@@ -5,15 +5,120 @@ import APIFeatures from "../../utils/ApiFeatures.js";
 import mongoose from "mongoose";
 
 // Create Perform Invoice
+// export const createPerformInvoice = catchAsync(async (req, res, next) => {
+//    try {
+//       const { lead, groupedProducts, totalAmount, status, fStatus } = req.body;
+
+//       // Parse groupedProducts if sent as JSON string
+//       let groupedProductsParsed = groupedProducts;
+//       if (typeof groupedProducts === "string") {
+//         groupedProductsParsed = JSON.parse(groupedProducts);
+//       }
+
+//       // Attach uploaded files to the right product's attachments array
+//       // This depends on your front-end structure: which files correspond to which product?
+//       // For simplicity, let's say all uploaded files go to the first product's attachments:
+//       if (
+//         groupedProductsParsed.length > 0 &&
+//         groupedProductsParsed[0].products.length > 0
+//       ) {
+//         const product = groupedProductsParsed[0].products[0];
+
+//         product.attachments = req.files.map((file) => ({
+//           filename: file.filename,
+//           originalname: file.originalname,
+//           path: `/documents/${file.filename}`,
+//         }));
+//       }
+
+//       const performInvoice = new PerformInvoice({
+//         lead,
+//         groupedProducts: groupedProductsParsed,
+//         totalAmount,
+//         status,
+//         fStatus,
+//       });
+
+//       await performInvoice.save();
+
+//       res.status(201).json({ message: "PerformInvoice created", performInvoice });
+//     } catch (error) {
+//       console.error(error);
+//       res.status(500).json({ error: "Something went wrong" });
+//     }
+
+// });
 export const createPerformInvoice = catchAsync(async (req, res, next) => {
-  const invoice = await PerformInvoice.create(req.body);
-  res.status(201).json({ status: "success", data: { invoice } });
+  try {
+    const { lead, groupedProducts, totalAmount, status, fStatus } = req.body;
+
+    // Parse groupedProducts if sent as JSON string
+    let groupedProductsParsed = groupedProducts;
+    if (typeof groupedProducts === "string") {
+      groupedProductsParsed = JSON.parse(groupedProducts);
+    }
+
+    // Helper function to find product by key in groupedProducts
+    const findProductByKey = (groups, key) => {
+      for (const group of groups) {
+        const product = group.products.find(
+          (prod) => prod.key === key || prod._key === key // adjust key name if needed
+        );
+        if (product) return product;
+      }
+      return null;
+    };
+
+    // Attach uploaded files to the right product's attachments based on file metadata
+    if (req.files && req.files.length > 0) {
+      req.files.forEach((file) => {
+        // Assume productKey is encoded in file.originalname or another property
+        // For example, file.originalname might be: "productKey-<key>-filename.ext"
+        const match = file.originalname.match(/productKey-([^-\s]+)-/);
+        if (match && match[1]) {
+          const productKey = match[1];
+          const product = findProductByKey(groupedProductsParsed, productKey);
+
+          if (product) {
+            if (!product.attachments) product.attachments = [];
+            product.attachments.push({       // ✅ User-friendly name
+              storedFilename: file.filename,     // ✅ Actual saved name
+              filename: newFilename,      // This is the generated unique filename
+              path: `/documents/${newFilename}`,
+              // ✅ Useful as fallback
+              uploadedAt: new Date(),            // Optional metadata
+            });
+          }
+        }
+      });
+    }
+
+    const performInvoice = new PerformInvoice({
+      lead,
+      groupedProducts: groupedProductsParsed,
+      totalAmount,
+      status,
+      fStatus,
+    });
+
+    await performInvoice.save();
+
+    res.status(201).json({ message: "PerformInvoice created", performInvoice });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Something went wrong" });
+  }
 });
 
 // Get all Perform Invoices
 export const getAllPerformInvoices = catchAsync(async (req, res, next) => {
+   const filter = {};
+  
+  if (req.query.leadId) {
+    filter.lead = req.query.leadId;
+  }
   const features = new APIFeatures(
-    PerformInvoice.find()
+    PerformInvoice.find(filter)
       .populate("lead") // populate the lead
       .populate("groupedProducts.products.vendors.vendor"), // populate vendors array
     req.query
@@ -159,14 +264,73 @@ export const getAllPerformInvoicesByVendor = catchAsync(async (req, res, next) =
 
 
 export const updatePerformInvoice = catchAsync(async (req, res, next) => {
-  const invoice = await PerformInvoice.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    { new: true, runValidators: true }
-  );
-  if (!invoice) return next(new AppError("Invoice not found", 404));
-  res.status(200).json({ status: "success", data: { invoice } });
+  try {
+    let { groupedProducts, status, fStatus, totalAmount } = req.body;
+
+    // Parse groupedProducts if it's a string
+    if (typeof groupedProducts === "string") {
+      groupedProducts = JSON.parse(groupedProducts);
+    }
+
+    // Helper to find product by key
+    const findProductByKey = (groups, key) => {
+      for (const group of groups) {
+        const product = group.products.find(
+          (prod) => prod.key === key || prod._key === key
+        );
+        if (product) return product;
+      }
+      return null;
+    };
+
+    // Handle uploaded files
+    if (req.files && req.files.length > 0) {
+      req.files.forEach((file) => {
+        // Use originalname format: "productKey-<key>-filename.ext"
+        const match = file.originalname;
+        if (match && match[1] && match[2]) {
+          const productKey = match[1];
+          const originalFilename = match[2];
+
+          const product = findProductByKey(groupedProducts, productKey);
+
+          if (product) {
+            if (!product.attachments) product.attachments = [];
+
+            product.attachments.push({
+              storedFilename: file.filename,                 // Actual saved filename
+              filename: originalFilename,                    // User-facing filename
+              path: `/documents/${file.filename}`,           // Path to access
+              uploadedAt: new Date(),                        // Optional
+            });
+          }
+        }
+      });
+    }
+
+    // Update Perform Invoice
+    const invoice = await PerformInvoice.findByIdAndUpdate(
+      req.params.id,
+      {
+        groupedProducts,
+        status,
+        fStatus,
+        totalAmount,
+      },
+      { new: true, runValidators: true }
+    );
+
+    if (!invoice) return next(new AppError("Invoice not found", 404));
+
+    res.status(200).json({ status: "success", data: { invoice } });
+
+  } catch (err) {
+    console.error("Update error:", err);
+    res.status(500).json({ error: "Failed to update perform invoice" });
+  }
 });
+
+
 
 // Delete Perform Invoice
 export const deletePerformInvoice = catchAsync(async (req, res, next) => {

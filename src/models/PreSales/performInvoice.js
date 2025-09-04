@@ -18,8 +18,15 @@ const productSchema = new mongoose.Schema({
 
   // ✅ per-product vendors with price
   vendors: [productVendorSchema],
+  attachments: [
+    {
+      filename: String,
+      storedFilename: String,
+      path: String,
+      uploadedAt: Date,
+    }
+  ]
 
-  attachments: [{ type: String }],
 });
 
 const groupedProductSchema = new mongoose.Schema({
@@ -41,7 +48,7 @@ const performInvoiceSchema = new mongoose.Schema(
       enum: ["draft", "requested", "approved", "purchased"],
       default: "draft",
     },
-        fStatus: {
+    fStatus: {
       type: String,
       enum: ["draft", "requested", "approved", "purchased"],
       default: "draft",
