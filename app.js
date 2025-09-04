@@ -27,6 +27,9 @@ app.use('/public', express.static(path.join(path.resolve(), 'public')));
 
 app.use("/uploads", express.static(path.join(__dirname, "public/images")));
 app.use("/images", express.static(path.join(__dirname, "public/images")));
+// Add this line after your existing static file configurations
+app.use("/documents", express.static(path.join(__dirname, "public/documents")));
+
 
 
 app.use(cors());

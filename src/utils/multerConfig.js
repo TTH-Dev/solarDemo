@@ -2,6 +2,7 @@ import multer, { MulterError } from "multer";
 import AppError from "./AppError.js";
 import { v4 as uuidv4 } from "uuid";
 import path from "path";
+import fs from "fs";
 import { fileURLToPath } from "url";
 
 // Get the directory name of the current module file
@@ -167,10 +168,26 @@ export const uploadCompanyImages = multer({
   }))
 ]);
 
+const documentsPath = path.join(__dirname, "../../public/documents");
+
+// ✅ Ensure the folder exists
+if (!fs.existsSync(documentsPath)) {
+  fs.mkdirSync(documentsPath, { recursive: true });
+}
+
+// ✅ Multer storage config
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, documentsPath);
+  },
+  filename: function (req, file, cb) {
+    // Just save file with original name (no unique suffix)
+    cb(null, file.originalname);
+  },
+});
 
 
+const upload = multer({ storage: storage });
 
 
-
-
-export { uploadImage, uploadImageAndZip, uploadImageAndZipOptional, uploadCustomImage };
+export { uploadImage, uploadImageAndZip, uploadImageAndZipOptional, uploadCustomImage , upload};
