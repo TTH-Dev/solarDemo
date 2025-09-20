@@ -16,19 +16,25 @@ export const createPurchase = catchAsync(async (req, res, next) => {
     });
 });
 
-
 export const getAllPurchase = catchAsync(async (req, res, next) => {
-    const limit = req.query.limit || 10;
-    const page = req.query.page || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const page = parseInt(req.query.page) || 1;
+    const leadId = req.query.leadId;
 
-    const features = new APIFeatures(Purchase.find().populate("lead"), req.query)
+    // Build query object
+    const queryObj = {};
+    if (leadId) {
+        queryObj.lead = leadId;
+    }
+
+    const features = new APIFeatures(Purchase.find(queryObj).populate("lead"), req.query)
         .limitFields()
         .sort()
         .paginate();
 
     const purchase = await features.query;
 
-    const totalRecords = await Purchase.countDocuments();
+    const totalRecords = await Purchase.countDocuments(queryObj);
     const totalPages = Math.ceil(totalRecords / limit);
 
     res.status(200).json({
@@ -39,6 +45,29 @@ export const getAllPurchase = catchAsync(async (req, res, next) => {
         data: { purchase },
     });
 });
+
+// export const getAllPurchase = catchAsync(async (req, res, next) => {
+//     const limit = req.query.limit || 10;
+//     const page = req.query.page || 1;
+
+//     const features = new APIFeatures(Purchase.find().populate("lead"), req.query)
+//         .limitFields()
+//         .sort()
+//         .paginate();
+
+//     const purchase = await features.query;
+
+//     const totalRecords = await Purchase.countDocuments();
+//     const totalPages = Math.ceil(totalRecords / limit);
+
+//     res.status(200).json({
+//         status: "success",
+//         totalPages,
+//         currentPage: page,
+//         result: purchase.length,
+//         data: { purchase },
+//     });
+// });
 
 export const getPurchaseById = catchAsync(async (req, res, next) => {
     const purchase = await Purchase.findById(req.params.id).populate("lead");

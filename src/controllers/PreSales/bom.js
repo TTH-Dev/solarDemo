@@ -144,80 +144,6 @@ export const getBOMById1 = catchAsync(async (req, res, next) => {
     });
 });
 
-// export const updateBOM = catchAsync(async (req, res, next) => {
-//     const { id } = req.params;
-//     const { userId } = req.body;
-
-//     const bom = await BOM.findById(id);
-//     if (!bom) {
-//         return next(new AppError("BOM not found", 404));
-//     }
-
-//     if (req.body.bomStatus === "approved") {
-//         const existingCoastedBom = await CoastedBom.findOne({ bomId: bom._id, });
-
-//   if (existingCoastedBom) {
-//     // ✅ Update bomStatus even if Coasted BOM already exists
-//     bom.bomStatus = "approved";
-//     await bom.save();
-
-//     return res.status(200).json({
-//       status: "success",
-//       message: "Coasted BOM already exists for this lead. BOM status updated.",
-//       data: { coastedBom: existingCoastedBom, bom },
-//     });
-//   }
-//         const data = {
-//             siteName: bom.siteName,
-//             structure: bom.structure,
-//             systemType: bom.systemType,
-//             qcKw: bom.qcKw,
-//             lead: bom.lead,
-//             productTable: bom.productTable,
-//             subTotal: bom.subTotal,
-//             total: bom.total,
-//              bom: bom._id
-//         };
-
-//         const coastedBom = await CoastedBom.create(data);
-
-
-//         let user = await User.findById(userId);
-//         if (!user) {
-//             user = await Admin.findById(userId)
-//         }
-
-//         const leadData = {
-//             coastedBomId: coastedBom._id,
-//             addedBy: user.name,
-//             addedDate: Date.now()
-//         }
-
-//         await Leads.findByIdAndUpdate(
-//             bom.lead,
-//             { $push: { coastedBom: leadData }, approvedBom: bom._id },
-//             { new: true }
-//         );
-
-//         bom.bomStatus = "approved";
-//         await bom.save();
-
-//         return res.status(200).json({
-//             status: "success",
-//             data: { coastedBom, bom },
-//         });
-//     }
-
-//     const updatedBOM = await BOM.findByIdAndUpdate(id, req.body, {
-//         new: true,
-//         runValidators: true,
-//     });
-
-//     res.status(200).json({
-//         status: "success",
-//         data: { updatedBOM },
-//     });
-// });
 
 export const updateBOM = catchAsync(async (req, res, next) => {
     const { id } = req.params;
@@ -252,23 +178,6 @@ export const updateBOM = catchAsync(async (req, res, next) => {
             subTotal: bom.subTotal,
             total: bom.total,
         };
-
-        // const coastedBom = await CoastedBom.create(data);
-
-        // const user = await User.findById(userId);
-
-
-        // const leadData = {
-        //     coastedBomId: coastedBom._id,
-        //     addedBy: user.name,
-        //     addedDate: Date.now()
-        // }
-
-        // await Leads.findByIdAndUpdate(
-        //     bom.lead,
-        //     { $push: { coastedBom: leadData }, approvedBom: bom._id },
-        //     { new: true }
-        // );
 
         bom.bomStatus = "approved";
         await bom.save();

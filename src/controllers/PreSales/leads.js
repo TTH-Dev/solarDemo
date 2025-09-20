@@ -16,9 +16,11 @@ import Product from "../../models/Inventory/products.js";
 import mongoose from "mongoose";
 import BOM from "../../models/PreSales/bom.js";
 import Quation from "../../models/PreSales/quation.js";
+import sendEmail from "../../utils/email.js";
+import wonCustomer from "../../models/WonCustomer.js";
 
 export const createLeads = catchAsync(async (req, res, next) => {
-  const { name, email, phoneNo, assignedTo, leadSourceType, } = req.body;
+  const { name, email, phoneNo, assignedTo, leadSourceType } = req.body;
 
   const leadData = {
     name: name,
@@ -28,6 +30,7 @@ export const createLeads = catchAsync(async (req, res, next) => {
     leadSource: req.body.leadSource,
     leadSourceType,
     assignedTo: assignedTo,
+    primaryEmail: req.body.primaryEmail,
   };
   const lead = await Leads.create(leadData);
 
@@ -49,7 +52,7 @@ export const createLeads = catchAsync(async (req, res, next) => {
 });
 
 export const getAllLeadss = catchAsync(async (req, res, next) => {
-  const limit = parseInt(req.query.limit) || 20;
+  const limit = parseInt(req.query.limit) || 1000;
   const page = parseInt(req.query.page) || 1;
 
   let filter = {};
@@ -72,7 +75,7 @@ export const getAllLeadss = catchAsync(async (req, res, next) => {
   if (req.query.isWon) {
     filter.isWon = req.query.isWon;
   }
-   if (req.query.leadWonStatus) {
+  if (req.query.leadWonStatus) {
     filter.leadWonStatus = req.query.leadWonStatus;
   }
   if (req.query.leadSource) {
@@ -84,21 +87,21 @@ export const getAllLeadss = catchAsync(async (req, res, next) => {
   if (req.query.projectProcessStatus) {
     filter.projectProcessStatus = req.query.projectProcessStatus;
   }
-   if (req.query.preSalesPerson === "") {
+  if (req.query.preSalesPerson === "") {
     filter.preSalesPerson = req.query.preSalesPerson;
   }
   if (req.query.preSalesPersonEmpty === "true") {
-  filter.preSalesPerson = { $in: [null, ""] };
-} else if (req.query.preSalesPersonAssigned === "true") {
-  filter.preSalesPerson = { $ne: null };
-}
- if (req.query.preSalesPersonAssigned === "false") {
-  filter.preSalesPerson = { $in: null };
-}
+    filter.preSalesPerson = { $in: [null, ""] };
+  } else if (req.query.preSalesPersonAssigned === "true") {
+    filter.preSalesPerson = { $ne: null };
+  }
+  if (req.query.preSalesPersonAssigned === "false") {
+    filter.preSalesPerson = { $in: null };
+  }
 
   if (!req.query.sort) {
-  req.query.sort = '-createdAt';
-}
+    req.query.sort = "-createdAt";
+  }
 
   const features = new APIFeatures(
     Leads.find(filter)
@@ -130,8 +133,11 @@ export const getAllLeadss = catchAsync(async (req, res, next) => {
     currentPage: page,
     result: leads.length,
     data: {
-      emailDm, nameDm, leadSourceDm,
-      leadSourceTypeDm, leads
+      emailDm,
+      nameDm,
+      leadSourceDm,
+      leadSourceTypeDm,
+      leads,
     },
   });
 });
@@ -150,7 +156,7 @@ export const getLeadsById = catchAsync(async (req, res, next) => {
       path: "bom.bomId",
       populate: {
         path: "costedBom",
-      }
+      },
     })
     .populate({
       path: "coastedBom.coastedBomId",
@@ -184,7 +190,9 @@ export const updateProjectProcessStatus = catchAsync(async (req, res, next) => {
   const { lead, projectProcessStatus } = req.body;
 
   if (!lead || !projectProcessStatus) {
-    return next(new AppError("Both 'lead' and 'projectProcessStatus' are required", 400));
+    return next(
+      new AppError("Both 'lead' and 'projectProcessStatus' are required", 400)
+    );
   }
 
   // Validate ObjectId
@@ -212,7 +220,15 @@ export const updateProjectProcessStatus = catchAsync(async (req, res, next) => {
 });
 
 export const updateLeads = catchAsync(async (req, res, next) => {
-  const { siteName, qualifiedDate, userId, siteVisitDetails, freeAreaAvailableOnGround, expectedDateOfInstallation, freeAreaAvailableOnRoof } = req.body;
+  const {
+    siteName,
+    qualifiedDate,
+    userId,
+    siteVisitDetails,
+    freeAreaAvailableOnGround,
+    expectedDateOfInstallation,
+    freeAreaAvailableOnRoof,
+  } = req.body;
   const { id } = req.params;
 
   let updatedLeads;
@@ -247,16 +263,21 @@ export const updateLeads = catchAsync(async (req, res, next) => {
     const cData = {
       lead: updatedLeads._id,
       companyName: updatedLeads.companyName,
-      phoneNo: Array.isArray(updatedLeads.phoneNo) ? updatedLeads.phoneNo : [updatedLeads.phoneNo],
-      email: Array.isArray(updatedLeads.email) ? updatedLeads.email : [updatedLeads.email],
+      phoneNo: Array.isArray(updatedLeads.phoneNo)
+        ? updatedLeads.phoneNo
+        : [updatedLeads.phoneNo],
+      email: Array.isArray(updatedLeads.email)
+        ? updatedLeads.email
+        : [updatedLeads.email],
       contactName: updatedLeads.name,
     };
     const customer = await Customer.create(cData);
   } else if (siteVisitDetails) {
-    const user = await User.findById(userId);
+    const user =
+      (await User.findById(userId)) || (await Admin.findById(userId));
 
     const data = {
-      // addedBy: user.name,
+      addedBy: user.name,
       addedDate: Date.now(),
       latitude: siteVisitDetails.latitude,
       longitude: siteVisitDetails.longitude,
@@ -357,43 +378,11 @@ export const importLeadsFromExcel = catchAsync(async (req, res, next) => {
   });
 });
 
-// export const addLeadNotes = catchAsync(async (req, res, next) => {
-//   const { note, userId } = req.body;
-//   const { id } = req.params;
-
-//   const user = await User.findById(userId);
-
-//   if (!user) {
-//     return next(new AppError("User Not Found!", 404));
-//   }
-//   const data = {
-//     text: note,
-//     addedBy: user.name,
-//     addedDate: Date.now(),
-//   };
-//   const lead = await Leads.findByIdAndUpdate(
-//     id,
-//     { $push: { notes: data } },
-//     { new: true }
-//   );
-
-//   if (!lead) {
-//     return next(new AppError("Lead Not Found!", 404));
-//   }
-
-//   res.status(200).json({
-//     status: "Success",
-//     data: {
-//       lead,
-//     },
-//   });
-// });
-
 export const addLeadNotes = catchAsync(async (req, res, next) => {
   const { note, userId, recipientIds } = req.body;
   const { id } = req.params;
 
-  const user = await User.findById(userId);
+  const user = (await User.findById(userId)) || (await Admin.findById(userId));
   if (!user) return next(new AppError("User Not Found!", 404));
 
   let visibleTo = [];
@@ -427,7 +416,7 @@ export const addLeadNotes = catchAsync(async (req, res, next) => {
     { $push: { notes: data } },
     { new: true }
   );
-  
+
   if (!lead) return next(new AppError("Lead Not Found!", 404));
 
   res.status(200).json({
@@ -435,8 +424,6 @@ export const addLeadNotes = catchAsync(async (req, res, next) => {
     data: { lead },
   });
 });
-
-
 
 export const removeLeadNotes = catchAsync(async (req, res, next) => {
   const { delId } = req.body;
@@ -466,7 +453,7 @@ export const addLeadFiles = catchAsync(async (req, res, next) => {
 
   let data = {};
 
-  const user = await User.findById(userId);
+  const user = (await User.findById(userId)) || (await Admin.findById(userId));
 
   if (req.files) {
     if (req.files.file) {
@@ -507,7 +494,7 @@ export const editLeadFiles = catchAsync(async (req, res, next) => {
 
   let data = {};
 
-  const user = await User.findById(userId);
+  const user = (await User.findById(userId)) || (await Admin.findById(userId));
 
   if (req.files) {
     if (req.files.file) {
@@ -567,7 +554,7 @@ export const addLeadSiteNotes = catchAsync(async (req, res, next) => {
   const { note, userId } = req.body;
   const { id } = req.params;
 
-  const user = await User.findById(userId);
+  const user = (await User.findById(userId)) || (await Admin.findById(userId));
 
   if (!user) {
     return next(new AppError("User Not Found!", 404));
@@ -622,7 +609,7 @@ export const addLeadSiteFiles = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   let data = {};
 
-  const user = await User.findById(userId);
+  const user = (await User.findById(userId)) || (await Admin.findById(userId));
 
   if (req.files) {
     if (req.files.file) {
@@ -663,7 +650,7 @@ export const editLeadSiteFiles = catchAsync(async (req, res, next) => {
 
   let data = {};
 
-  const user = await User.findById(userId);
+  const user = (await User.findById(userId)) || (await Admin.findById(userId));
 
   if (req.files) {
     if (req.files.file) {
@@ -884,14 +871,39 @@ export const getSalesWonChange = catchAsync(async (req, res, next) => {
     name: lead.siteDetails.siteName,
     lead: lead._id,
   };
+    let customer;
 
   if (leadWonStatus == "won") {
     const project = await Project.create(data);
+
+
+    const customerData = {
+      contactName: lead.name,
+      primaryEmail: lead.primaryEmail,
+      phoneNo: lead.phoneNo,
+      email: lead.email,
+      project: [project._id],
+    };
+
+
+    const existingCustomer = await wonCustomer.findOne({
+      primaryEmail: customerData.primaryEmail,
+    });
+
+    if (existingCustomer) {
+      customer = await wonCustomer.findByIdAndUpdate(
+        existingCustomer._id,
+        { project: [...existingCustomer.project, ...customerData.project] },
+        { new: true, runValidators: true }
+      );
+    } else {
+      customer = await wonCustomer.create(customerData);
+    }
   }
 
   res.status(200).json({
     status: "success",
-    data: { lead },
+    data: { lead, customer },
   });
 });
 
@@ -972,11 +984,10 @@ export const addICHistory = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const { userId } = req.body;
 
-  let user = await User.findById(userId)
+  let user = await User.findById(userId);
   if (!user) {
-    user = await Admin.findById(userId)
+    user = await Admin.findById(userId);
   }
-
 
   const data = {
     checkBy: user.name,
@@ -998,7 +1009,7 @@ export const addCAHistory = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const { userId } = req.body;
 
-  const user = await User.findById(userId);
+  const user = (await User.findById(userId)) || (await Admin.findById(userId));
 
   const data = {
     checkBy: user.name,
@@ -1021,11 +1032,11 @@ export const addSamplequatos = catchAsync(async (req, res, next) => {
   const { quotes, userId } = req.body;
   const { id } = req.params;
 
-  const user = await User.findById(userId);
+  const user = (await User.findById(userId)) || (await Admin.findById(userId));
 
   const data = {
     quotes: quotes,
-    // addedBy: user.name,
+    addedBy: user.name,
     addedDate: Date.now(),
   };
   const lead = await Leads.findByIdAndUpdate(
@@ -1047,7 +1058,7 @@ export const addRecordRecipt = catchAsync(async (req, res, next) => {
   const { userId, paymentMode, receivedAmount, recivedDate } = req.body;
   const { id } = req.params;
 
-  const user = await User.findById(userId);
+  const user = (await User.findById(userId)) || (await Admin.findById(userId));
   if (!user) return next(new AppError("User not found", 404));
 
   const lead = await Leads.findById(id);
@@ -1087,7 +1098,7 @@ export const addDelverySchedudule = catchAsync(async (req, res, next) => {
     datas.deliveryChallan = req.files.deliveryChallan[0].filename;
   }
 
-  const user = await User.findById(userId);
+  const user = (await User.findById(userId)) || (await Admin.findById(userId));
 
   const data = {
     addressLine1: req.body.addressLine1,
@@ -1136,7 +1147,7 @@ export const addTaskActivity = catchAsync(async (req, res, next) => {
     return next(new AppError("Lead not found", 404));
   }
 
-  const user = await User.findById(userId);
+  const user = (await User.findById(userId)) || (await Admin.findById(userId));
   if (!user) {
     return next(new AppError("User not found", 404));
   }
@@ -1256,7 +1267,9 @@ export const updateQuotationStatus = catchAsync(async (req, res, next) => {
     quationDoc.quationStatus = status;
     await quationDoc.save();
 
-    lead.balanceAmount = quationDoc.total || 0;
+    lead.finalizedTotalAmt = quationDoc.total;
+  lead.balanceAmount = quationDoc.total;
+
 
   } else if (status.toLowerCase() === "rejected") {
     // Reject current quotation
@@ -1274,10 +1287,12 @@ export const updateQuotationStatus = catchAsync(async (req, res, next) => {
     if (approvedQuatations.length > 0) {
       // Pick the first approved quotation's total for balanceAmount
       const approvedQuatationDoc = await Quation.findById(approvedQuatations[0].quatationId);
-      lead.balanceAmount = approvedQuatationDoc?.total || 0;
+      lead.balanceAmount = approvedQuatationDoc?.total;
+       lead.finalizedTotalAmt = approvedQuatationDoc?.total;
     } else {
       // No more approved quotations, set balanceAmount to 0
       lead.balanceAmount = 0;
+      lead.finalizedTotalAmt = 0;
     }
   } else {
     // For other statuses just update quotation and Quation doc status
@@ -1300,10 +1315,10 @@ export const updateQuotationStatus = catchAsync(async (req, res, next) => {
       quotationId,
       status,
       balanceAmount: lead.balanceAmount,
+      
     },
   });
 });
-
 // export const updateScheduleStatus = catchAsync(async (req, res, next) => {
 //   const { scheduleId, status } = req.body;
 
@@ -1340,7 +1355,9 @@ export const updateScheduleStatus = catchAsync(async (req, res, next) => {
 
   const validStatuses = ["pending", "dispatched", "delivered"];
   if (!status || !validStatuses.includes(status.toLowerCase())) {
-    return next(new AppError(`Status must be one of: ${validStatuses.join(", ")}`, 400));
+    return next(
+      new AppError(`Status must be one of: ${validStatuses.join(", ")}`, 400)
+    );
   }
 
   const schedule = await Schedule.findById(scheduleId);
@@ -1394,35 +1411,8 @@ export const homeDataTable = catchAsync(async (req, res) => {
   });
 });
 
-// export const createdChallan = catchAsync(async (req, res) => {
-//   const data = req.body;
-
-//   if (!data || Object.keys(data).length === 0) {
-//     return res.status(400).json({
-//       message: "Bad Request. No data provided.",
-//     });
-//   }
-//   const useriD = req.body.userId;
-//   const user = await User.findById(useriD);
-
-//   let df = {
-//     ...data,
-//     addedBy: user.name,
-//     addedDate: new Date(),
-//   };
-
-//   const created = await Dchallan.create(df);
-
-
-//   res.status(201).json({
-//     message: "Challan created successfully",
-//     data: created,
-//   });
-// });
-
 export const createdChallan = catchAsync(async (req, res, next) => {
-  const { challanDesc, lead, bomId } = req.body;
-
+  const { challanDesc, bomId } = req.body;
 
   // 2. Update BOM & Product stock
   const bom = await BOM.findById(bomId);
@@ -1443,33 +1433,29 @@ export const createdChallan = catchAsync(async (req, res, next) => {
       for (const pt of bom.productTable) {
         for (const prod of pt.products) {
           if (String(prod.productId) === String(productId)) {
-            prod.balQuantity = (prod.quantity) - qty;
-            pt.markModified('products');
+            prod.balQuantity = prod.quantity - qty;
+            pt.markModified("products");
           }
         }
       }
     }
-    bom.markModified('productTable'); // mark outer array modified too
+    bom.markModified("productTable"); // mark outer array modified too
 
     await bom.save();
 
-
     // Update Product stock
     await Product.findByIdAndUpdate(productId, {
-      $inc: { stock: -qty }
+      $inc: { stock: -qty },
     });
-
   }
 
   const challan = await Dchallan.create(req.body);
   res.status(201).json({
     status: "success",
     data: challan,
-    bom: bom
-
+    bom: bom,
   });
 });
-
 
 export const getChallanByLeadId = catchAsync(async (req, res) => {
   const { leadId } = req.query;
@@ -1534,7 +1520,16 @@ export const updateChallanById = catchAsync(async (req, res) => {
     });
   }
 
-  const updatedChallan = await Dchallan.findByIdAndUpdate(_id, req.body, {
+  const updateData = {
+    ...req.body,
+  };
+
+  // ✅ If a file is uploaded, set deliveryChallan to the filename
+  if (req.file) {
+    updateData.deliveryChallan = req.file.filename;
+  }
+
+  const updatedChallan = await Dchallan.findByIdAndUpdate(_id, updateData, {
     new: true,
     runValidators: true,
   });
@@ -1550,7 +1545,6 @@ export const updateChallanById = catchAsync(async (req, res) => {
     data: updatedChallan,
   });
 });
-
 
 export const scheduleCreate = catchAsync(async (req, res) => {
   if (req.files) {
@@ -1578,7 +1572,6 @@ export const scheduleCreate = catchAsync(async (req, res) => {
 export const getScheduleBy = catchAsync(async (req, res) => {
   const { leadId } = req.query;
 
-
   if (!leadId) {
     return res
       .status(400)
@@ -1588,6 +1581,20 @@ export const getScheduleBy = catchAsync(async (req, res) => {
   const datas = await Schedule.find({ lead: leadId });
 
   res.status(200).json({ message: "Success", datas });
+});
+
+export const emailHandler = catchAsync(async (req, res) => {
+  const { from, to, subject, text } = req.body;
+
+  if (!from || !to || !subject || !text) {
+    return res
+      .status(400)
+      .json({ success: false, error: "Missing required fields" });
+  }
+
+  const info = await sendEmail({ from, to, subject, text });
+
+  res.status(200).json({ success: true, messageId: info.messageId, info });
 });
 
 // LeadController.js
@@ -1600,11 +1607,135 @@ export const decideDesignFile = catchAsync(async (req, res, next) => {
   const file = lead.designFiles.id(fileId);
   if (!file) return next(new AppError("File not found", 404));
 
-  file.status = decision;           // new field
+  file.status = decision; // new field
   file.decisionBy = userId;
   file.decisionAt = Date.now();
 
   await lead.save();
 
   res.status(200).json({ status: "success", data: { file } });
+});
+
+
+
+export const homePayment = catchAsync(async (req, res) => {
+  const filter = {};
+
+  // Optional: only include "qualified" leads
+  // filter.status = "qualified";
+
+  // Section + Date (Designer site visit)
+  if (req.query.section && req.query.date) {
+    filter.section = req.query.section;
+    const start = dayjs(req.query.date).startOf("day").toDate();
+    const end = dayjs(req.query.date).endOf("day").toDate();
+    filter["designerSiteVisitDetails.scheduleDate"] = { $gte: start, $lte: end };
+  }
+
+  // Site visit schedule date
+  if (req.query.sitevisit && req.query.date) {
+    const start = dayjs(req.query.date).startOf("day").toDate();
+    const end = dayjs(req.query.date).endOf("day").toDate();
+    filter["siteDetails.scheduleDate"] = { $gte: start, $lte: end };
+  }
+
+  // Filter by createdAt (today, weekly, monthly)
+  if (req.query.filterType) {
+    let start, end;
+    switch (req.query.filterType) {
+      case "today":
+        start = dayjs().startOf("day").toDate();
+        end = dayjs().endOf("day").toDate();
+        break;
+      case "weekly":
+        start = dayjs().startOf("week").toDate();
+        end = dayjs().endOf("week").toDate();
+        break;
+      case "monthly":
+        start = dayjs().startOf("month").toDate();
+        end = dayjs().endOf("month").toDate();
+        break;
+      default:
+        return res.status(400).json({ message: "Invalid filterType value" });
+    }
+    filter.createdAt = { $gte: start, $lte: end };
+  }
+
+  const leads = await Leads.find(filter).populate("assignedTo");
+
+  if (req.query.paymentSummary === "true") {
+    let totalAmount = 0;
+    let receivedAmount = 0;
+    let pendingAmount = 0;
+
+    let receivedCount = 0;
+    let pendingCount = 0;
+
+    leads.forEach(lead => {
+      const leadTotal = Number(lead.totalAmount ?? lead.finalizedTotalAmt ?? 0);
+      let leadReceived = 0;
+
+      if (Array.isArray(lead.recordReceipt)) {
+        lead.recordReceipt.forEach(receipt => {
+          leadReceived += Number(receipt.receivedAmount || 0);
+        });
+      }
+
+      // Only consider a lead if it has a "total" > 0, else skip or treat differently
+      if (leadTotal <= 0) {
+        // Optionally skip this lead in all counts
+        console.log(`Skipping lead ${lead._id} because leadTotal <= 0`);
+        return;
+      }
+
+      const thisPending = leadTotal - leadReceived;
+      const leadPending = thisPending > 0 ? thisPending : 0;
+
+      totalAmount += leadTotal;
+      receivedAmount += leadReceived;
+      pendingAmount += leadPending;
+
+      // ReceivedCount: if any amount received > 0
+      if (leadReceived > 0) {
+        receivedCount += 1;
+      }
+
+      // PendingCount: if no payment received (received = 0) AND total > 0
+      if (leadReceived === 0) {
+        pendingCount += 1;
+      }
+
+      // Debug per lead
+      console.log({
+        leadId: lead._id,
+        leadTotal,
+        leadReceived,
+        computedPending: leadPending,
+        counts: {
+          receivedCountIndicator: leadReceived > 0 ? 1 : 0,
+          pendingCountIndicator: leadReceived === 0 ? 1 : 0
+        }
+      });
+    });
+
+    return res.status(200).json({
+      status: "success",
+      summary: {
+        totalLeads: leads.filter(l => {
+          const t = Number(l.totalAmount ?? l.finalizedTotalAmt ?? 0);
+          return t > 0;
+        }).length, 
+        totalAmount,
+        receivedAmount,
+        pendingAmount,
+        receivedCount,
+        pendingCount
+      },
+    });
+  }
+
+  return res.status(200).json({
+    status: "success",
+    data: leads,
+  });
 });

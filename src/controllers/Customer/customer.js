@@ -7,7 +7,6 @@ export const getAllCustomer = catchAsync(async (req, res, next) => {
     const limit = req.query.limit || 10;
     const page = req.query.page || 1;
 
-
     let filter = {};
 
     if (req.query.companyName) {

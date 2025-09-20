@@ -4,39 +4,98 @@ import AppError from "../../utils/AppError.js";
 import APIFeatures from "../../utils/ApiFeatures.js";
 import User from "../../models/Members/User.js"
 import Leads from "../../models/PreSales/leads.js";
+import Admin from "../../models/Admin/admin.js";
+
+// export const getAllProject = catchAsync(async (req, res, next) => {
+//     const limit = parseInt(req.query.limit) || 15;
+//     const page = parseInt(req.query.page) || 1;
+//     const { processStatus , companyName, phoneNo } = req.query;
+//     const filter = {};
+//     if (processStatus) {
+//         if (processStatus === "excludeCompleted") {
+//             filter.processStatus = { $ne: "completed" };
+//         } else {
+//             filter.processStatus = processStatus;
+//         }
+//     }
+//     const features = new APIFeatures(
+//         Project
+//             .find(filter)
+//             .sort("-createdAt")
+//             .populate("lead")
+//             .populate("members")
+//             .populate("team")
+//             .limit(limit)
+//             .skip((page - 1) * limit),
+//         req.query)
+//     const totalRecords = await Project.countDocuments(filter);
+//     const projects = await features.query;
+//     const totalPages = Math.ceil(totalRecords / limit);
+
+//     res.status(200).json({
+//         status: "success",
+//         totalPages,
+//         currentPage: page,
+//         result: projects.length,
+//         data: { projects },
+//     });
+// });
 
 export const getAllProject = catchAsync(async (req, res, next) => {
-    const limit = parseInt(req.query.limit) || 10;
+    const limit = parseInt(req.query.limit) || 15;
     const page = parseInt(req.query.page) || 1;
-    const { processStatus } = req.query;
+    const { processStatus, companyName, phoneNo } = req.query;
 
-    // Build filter object conditionally
     const filter = {};
+
+    // ✅ Filter by process status
     if (processStatus) {
-        filter.processStatus = processStatus;
+        if (processStatus === "excludeCompleted") {
+            filter.processStatus = { $ne: "completed" };
+        } else {
+            filter.processStatus = processStatus;
+        }
     }
 
-    const features = new APIFeatures(
-        Project.find()
-            .populate("lead").populate("members").populate("team"),
-        req.query
-    )
-        
-        .sort()
-        
+    // ✅ Start building base query
+    let query = Project.find(filter)
+        .sort("-createdAt")
+        .populate({
+            path: "lead",
+            match: {
+                ...(companyName ? { companyName: { $regex: companyName, $options: "i" } } : {}),
+                ...(phoneNo ? { phoneNo: { $in: [phoneNo] } } : {}) // phoneNo is an array
+            }
+        })
+        .populate("members")
+        .populate("team")
+        .limit(limit)
+        .skip((page - 1) * limit);
 
-    const projects = await features.query;
-    const totalRecords = await Project.countDocuments();
+    const features = new APIFeatures(query, req.query);
+
+    const allProjects = await features.query;
+
+    // ✅ Remove projects with no matched lead if lead filter was applied
+    const filteredProjects = (companyName || phoneNo)
+        ? allProjects.filter(project => project.lead !== null)
+        : allProjects;
+
+    const totalRecords = filteredProjects.length;
     const totalPages = Math.ceil(totalRecords / limit);
 
     res.status(200).json({
         status: "success",
         totalPages,
         currentPage: page,
-        result: projects.length,
-        data: { projects },
+        result: filteredProjects.length,
+        data: {
+            projects: filteredProjects,
+        },
     });
 });
+
+
 export const updateProject = catchAsync(async (req, res, next) => {
     const { processName, memberType, priority, startDate, dueDate } = req.body;
     const { id } = req.params;
@@ -129,7 +188,7 @@ export const addSamplequatos = catchAsync(async (req, res, next) => {
     const { id } = req.params;
 
 
-    const user = await User.findById(userId);
+    const user = await User.findById(userId) || await Admin.findById(userId);
 
     const data = {
         quotes: quotes,
@@ -160,12 +219,12 @@ export const addSamplequatos = catchAsync(async (req, res, next) => {
 });
 
 export const addSolarInspection = catchAsync(async (req, res, next) => {
-    const { id } = req.params;   // route param
+    const { id } = req.params;
     const { inspectionData } = req.body;
 
     const updatedProject = await Project.findByIdAndUpdate(
         id,
-        { $set: { solarInspection: [inspectionData] } },  // overwrite with a single item array
+        { $set: { solarInspection: [inspectionData] } },
         { new: true, runValidators: true }
     );
 

@@ -3,6 +3,7 @@ import catchAsync from "../../utils/catchAsync.js";
 import AppError from "../../utils/AppError.js";
 import APIFeatures from "../../utils/ApiFeatures.js";
 import User from "../../models/Members/User.js";
+import Admin from "../../models/Admin/admin.js";
 
 export const createDeliveryChellan = catchAsync(async (req, res, next) => {
     const { userId } = req.body;
@@ -17,7 +18,7 @@ export const createDeliveryChellan = catchAsync(async (req, res, next) => {
     const shipToDetails = JSON.parse(req.body.shipToDetails);
     const billToDetails = JSON.parse(req.body.billToDetails);
 
-    const user = await User.findById(userId);
+    const user = await User.findById(userId) || await Admin.findById(userId);
 
     const data = {
         productTable,

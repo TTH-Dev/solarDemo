@@ -5,20 +5,21 @@ import AppError from "../../utils/AppError.js";
 import APIFeatures from "../../utils/ApiFeatures.js";
 import User from "../../models/Members/User.js";
 import CoastedBom from "../../models/PreSales/coastedBom.js";
+import Admin from "../../models/Admin/admin.js";
 
-export const createQuotation = catchAsync(async (req, res, next) => {
+export const createQuotation = catchAsync(async (req, res) => {
     const { userId, lead } = req.body;
 
 
-    const user = await User.findById(userId);
+    const user = await User.findById(userId) || await Admin.findById(userId);
 
-    // req.body.addedBy = user.name;
+    req.body.addedBy = user.name;
     req.body.addedDate = Date.now();
 
     const quotation = await Quotation.create(req.body);
 
     const data = {
-        // addedBy: user.name,
+        addedBy: user.name,
         addedDate: Date.now(),
         quatationId: quotation._id
     }
@@ -45,7 +46,7 @@ export const createQuotation = catchAsync(async (req, res, next) => {
 });
 
 // READ ALL
-export const getAllQuotations = catchAsync(async (req, res, next) => {
+export const getAllQuotations = catchAsync(async (req, res) => {
     const limit = req.query.limit || 10;
     const page = req.query.page || 1;
 

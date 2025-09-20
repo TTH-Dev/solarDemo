@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 
-
-const extraMaterialSchema = new mongoose.Schema({
-  name: String,
-  amount: Number,
-  expDate: Date,
-  totalAmount: Number
-
-}, { timestamps: true });
-
+const extraMaterialSchema = new mongoose.Schema(
+  {
+    name: String,
+    amount: Number,
+    expDate: Date,
+    totalAmount: Number,
+  },
+  { timestamps: true }
+);
 
 const Leadschema = new mongoose.Schema(
   {
@@ -17,7 +17,12 @@ const Leadschema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-
+    primaryEmail: {
+      type: String,
+      match: [/^\S+@\S+\.\S+$/, "Invalid email format"],
+      required: true,
+      lowercase: true,
+    },
     email: {
       type: [String],
       required: true,
@@ -70,14 +75,14 @@ const Leadschema = new mongoose.Schema(
       type: Date,
     },
     notes: [
-  {
-    text: String,
-    addedBy: String,
-    addedDate: Date,
-    visibleTo: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    visibleToAll: { type: Boolean, default: false }
-  }
-],
+      {
+        text: String,
+        addedBy: String,
+        addedDate: Date,
+        visibleTo: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+        visibleToAll: { type: Boolean, default: false },
+      },
+    ],
     siteNotes: [
       {
         text: { type: String },
@@ -85,17 +90,19 @@ const Leadschema = new mongoose.Schema(
         addedDate: { type: Date },
       },
     ],
-    estimateProjectValye: [{
-      name: {
-        type: String
+    estimateProjectValye: [
+      {
+        name: {
+          type: String,
+        },
+        amount: {
+          type: Number,
+        },
+        expDate: {
+          type: Date,
+        },
       },
-      amount: {
-        type: Number
-      },
-      expDate: {
-        type: Date
-      }
-    }],
+    ],
     files: [
       {
         fileName: { type: String },
@@ -118,13 +125,17 @@ const Leadschema = new mongoose.Schema(
         files: { type: String },
         addedBy: { type: String },
         addedDate: { type: Date },
-        status: { type: String, enum: ["pending", "approved", "redesign"], default: "pending" },
+        status: {
+          type: String,
+          enum: ["pending", "approved", "redesign"],
+          default: "pending",
+        },
         decisionBy: String,
-        decisionAt: Date
+        decisionAt: Date,
       },
     ],
     projectProcessStatus: {
-      type: String
+      type: String,
     },
     followUpPeriod: {
       type: Date,
@@ -208,11 +219,11 @@ const Leadschema = new mongoose.Schema(
         // required: true
       },
       addedBy: {
-        type: String
+        type: String,
       },
       addedDate: {
-        type: Date
-      }
+        type: Date,
+      },
     },
     designerSiteVisitDetails: {
       scheduleDate: {
@@ -250,11 +261,13 @@ const Leadschema = new mongoose.Schema(
     ],
     taskActivities: {
       type: Map,
-      of: [{
-        processName: String,
-        completedBy: String,
-        completedAt: Date
-      }]
+      of: [
+        {
+          processName: String,
+          completedBy: String,
+          completedAt: Date,
+        },
+      ],
     },
     designPerson: {
       type: mongoose.Schema.Types.ObjectId,
@@ -393,19 +406,21 @@ const Leadschema = new mongoose.Schema(
         },
       },
     ],
-    costAnalysisChckHistory: [{
-      checkBy: String,
-      checkedDate: Date
-    }],
+    costAnalysisChckHistory: [
+      {
+        checkBy: String,
+        checkedDate: Date,
+      },
+    ],
     projectForcasting: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "ProjectForcasting"
+      ref: "ProjectForcasting",
     },
     quatation: [
       {
         quatationId: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "Quatation"
+          ref: "Quatation",
         },
         addedBy: { type: String },
         addedDate: { type: Date },
@@ -413,58 +428,66 @@ const Leadschema = new mongoose.Schema(
       },
     ],
 
-    inventoryChckHistory: [{
-      checkBy: String,
-      checkedDate: Date
-    }],
-    sampleQuotes: [{
-      quotes: Number,
-      addedBy: String,
-      addedDate: Date
-    }],
-    recordReceipt: [{
-      paymentMode: String,
-      receivedAmount: Number,
-      recivedDate: Date,
-      addedBy: String,
-    }],
+    inventoryChckHistory: [
+      {
+        checkBy: String,
+        checkedDate: Date,
+      },
+    ],
+    sampleQuotes: [
+      {
+        quotes: Number,
+        addedBy: String,
+        addedDate: Date,
+      },
+    ],
+    recordReceipt: [
+      {
+        paymentMode: String,
+        receivedAmount: Number,
+        recivedDate: Date,
+        addedBy: String,
+      },
+    ],
     balanceAmount: Number,
     totalAmount: Number,
-    deliverySchedule: [{
-      addressLine1: {
-        type: String
+    deliverySchedule: [
+      {
+        addressLine1: {
+          type: String,
+        },
+        addressLine2: {
+          type: String,
+        },
+        city: {
+          type: String,
+        },
+        state: {
+          type: String,
+        },
+        pinCode: {
+          type: String,
+        },
+        date: {
+          type: Date,
+        },
+        time: {
+          type: String,
+        },
+        notes: {
+          type: String,
+        },
+        deliveryChallan: {
+          type: String,
+        },
+        addedBy: {
+          type: String,
+        },
+        addedDate: {
+          type: Date,
+        },
       },
-      addressLine2: {
-        type: String
-      },
-      city: {
-        type: String
-      },
-      state: {
-        type: String
-      },
-      pinCode: {
-        type: String
-      },
-      date: {
-        type: Date
-      },
-      time: {
-        type: String
-      },
-      notes: {
-        type: String
-      },
-      deliveryChallan: {
-        type: String
-      },
-      addedBy: {
-        type: String
-      },
-      addedDate: {
-        type: Date
-      }
-    }],
+    ],
     totalReturnQty: Number,
     finalizedTotalAmt: Number,
   },

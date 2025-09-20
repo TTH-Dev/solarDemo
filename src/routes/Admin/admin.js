@@ -36,5 +36,4 @@ adminRouter.route("/update-admin/:id").patch(uploadCompanyImages,updateAdmin);
 adminRouter.route("/getMe").get(getAdmin);
 
 
-
- export default adminRouter;
+export default adminRouter;

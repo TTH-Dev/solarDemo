@@ -15,11 +15,11 @@ const bomSchema = new mongoose.Schema({
     },
     systemType: {
         type: String,
-        required: true
+        // required: true
     },
     structure: {
         type: String,
-        required: true
+        // required: true
     },
     finalizeBom: {
         type: String,

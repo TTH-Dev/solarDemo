@@ -5,6 +5,7 @@ import catchAsync from "../../utils/catchAsync.js";
 import AppError from "../../utils/AppError.js";
 import APIFeatures from "../../utils/ApiFeatures.js"
 import User from "../../models/Members/User.js"
+import Admin from "../../models/Admin/admin.js";
 
 export const createReturnMaterial = catchAsync(async (req, res, next) => {
     const { lead, productTable,userId } = req.body;
@@ -23,7 +24,7 @@ export const createReturnMaterial = catchAsync(async (req, res, next) => {
         }
     }
 
-    const df=await User.findById(userId)
+    const df=await User.findById(userId) || await Admin.findById(userId)
 
     const gh={...req.body,addedBy:df.name,addedDate:new Date()}
 

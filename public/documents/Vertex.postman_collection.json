@@ -1,0 +1,784 @@
+{
+	"info": {
+		"_postman_id": "a3650a4f-33b8-4832-b12a-82e8e07f1efa",
+		"name": "Vertex",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43378669",
+		"_collection_link": "https://galactic-rocket-536746.postman.co/workspace/New-Team-Workspace~b6149fa7-3c10-414c-a897-30f3a6434c01/collection/43378669-a3650a4f-33b8-4832-b12a-82e8e07f1efa?action=share&source=collection_link&creator=43378669"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"subadmin@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YjJhZTZlNzNjZWUyNjBhMzYwN2FhNiIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzU2NTQwNjA5LCJleHAiOjE3NTY2MjcwMDl9.d7RXgEV1ErjLj3NyN--3Hi_FdInEV1Guevjia6G7xDk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/users?location=68b2a41225a106ce2419d998",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "location",
+									"value": "68b2a41225a106ce2419d998"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YjJhYThmNmY3OWQ1YzQ5ZTAwMTliMyIsInJvbGUiOiJzdWJhZG1pbiIsImJyYW5jaCI6IjY4YjJhNDEyMjVhMTA2Y2UyNDE5ZDk5OCIsImxvY2F0aW9uIjoiNjhiMmE0MTIyNWExMDZjZTI0MTlkOTk4IiwiaWF0IjoxNzU2NTM5NTkxLCJleHAiOjE3NTY2MjU5OTF9.AxRrEYnqLyIZJPSQzWdQ3_SBtwU9Cy5coYSD7KAZYQY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Worker\",\r\n  \"empId\": \"EMP007824\",\r\n  \"department\": \"Field worker\",\r\n  \"designation\": \"Support\",\r\n//   \"location\": \"68b2a41225a106ce2419d998\", \r\n  \"contactNumber\": \"+1-555-987-6543\",\r\n  \"dateOfJoining\": \"2023-03-15T00:00:00.000Z\",\r\n  \"email\": \"worker@gmail.com\",\r\n  \"password\": \"123456\"\r\n//   \"role\": \"worker\",\r\n//   \"branch\": \"68b2a41225a106ce2419d998\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/create",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YWZlNjYwZjA2NmM2NWQ5ZTg2YmMyMiIsInJvbGUiOiJhZG1pbiIsImJyYW5jaCI6Ik1haW4gQnJhbmNoIiwiaWF0IjoxNzU2MzU5Mjk3LCJleHAiOjE3NTY0NDU2OTd9.gyXq99FPepewB2pYnL6Tpn7lt60vPiXPxKbzUE0VNbs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/users/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "68afe660f066c65d9e86bc22"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YWZlNjYwZjA2NmM2NWQ5ZTg2YmMyMiIsInJvbGUiOiJhZG1pbiIsImJyYW5jaCI6Ik1haW4gQnJhbmNoIiwiaWF0IjoxNzU2MzU5Mjk3LCJleHAiOjE3NTY0NDU2OTd9.gyXq99FPepewB2pYnL6Tpn7lt60vPiXPxKbzUE0VNbs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/users/profile",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YjUyOTExZjA1YWIzODhkZTczNTQ1YiIsInJvbGUiOiJhZG1pbiIsImJyYW5jaCI6IjY4YjAwNDcyYjM2YzY0Mzc3ZWYwNTMzNiIsImxvY2F0aW9uIjoiNjhiMDA0NzJiMzZjNjQzNzdlZjA1MzM2IiwiaWF0IjoxNzU2NzA0NTAzLCJleHAiOjE3NTY3OTA5MDN9.J4T372nXwdg-ZY8G_b18WK-E3sPaC5YtU3BnBpAB9jU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"68b52911f05ab388de73545b\",\r\n    \"name\": \" Admin\",\r\n    \"empId\": \"EMP009824\",\r\n    \"department\": \"Field worker\",\r\n    \"designation\": \"Support\",\r\n   \r\n    \"contactNumber\": \"+1-555-987-6543\",\r\n    \"dateOfJoining\": \"2023-03-15T00:00:00.000Z\",\r\n    \"email\": \"admin123@gmail.com\",\r\n                   \r\n  \"OrganizationName\": \"Example Corp\",\r\n  \"OrganizationAddress\": \"123 Example Street, City, Country\",\r\n  \"OrganizationContact\": \"+1-555-987-6543\"\r\n                             // branch as string per schema\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/users/68b52911f05ab388de73545b",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"68b52911f05ab388de73545b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/users/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Services",
+			"item": [
+				{
+					"name": "create service",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YWZlNjYwZjA2NmM2NWQ5ZTg2YmMyMiIsInJvbGUiOiJhZG1pbiIsImJyYW5jaCI6Ik1haW4gQnJhbmNoIiwiaWF0IjoxNzU2MzU5Mjk3LCJleHAiOjE3NTY0NDU2OTd9.gyXq99FPepewB2pYnL6Tpn7lt60vPiXPxKbzUE0VNbs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerName\": \"Mary\",\r\n  \"contactPerson\": \"Mary Smith\",\r\n  \"location\": \"68b00472b36c64377ef05336\",   // Replace with a valid Location ObjectId\r\n  \"makeModel\": \"Isolation Transformer\",\r\n  \"serviceType\": \"PM\",\r\n  \"serialNo\": \"SN987654325\",\r\n  \"complaintDetail\": \"Air conditioner not cooling properly\",\r\n  \"addressDetails\": \"123 Main Street, Apartment 4\",\r\n  \"contactNo\": \"+1-555-123-4567\",\r\n  \"additionalNote\": \"Prefers to schedule in the morning\",\r\n  \"serviceDate\": \"2025-09-30T09:00:00.000Z\",\r\n  \"assignTo\": [\"68b00774b36c64377ef0534b\"]// Replace with valid User ObjectId(s)\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/services",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllServices",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YjUyOTExZjA1YWIzODhkZTczNTQ1YiIsInJvbGUiOiJhZG1pbiIsImJyYW5jaCI6IjY4YjAwNDcyYjM2YzY0Mzc3ZWYwNTMzNiIsImxvY2F0aW9uIjoiNjhiMDA0NzJiMzZjNjQzNzdlZjA1MzM2IiwiaWF0IjoxNzU2ODEzNzc4LCJleHAiOjE3NTc0MTg1Nzh9.u4iE1YflAkXv5-fEOmP80F8bQ68TVtw1b3OLHTCoaag",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"subadmin@gmail.com\",\r\n    \"password\": \"123456\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/services?search=john",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"services"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2025-08-28",
+									"disabled": true
+								},
+								{
+									"key": "endDate",
+									"value": "2025-09-01",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "pending",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "desc",
+									"disabled": true
+								},
+								{
+									"key": "location",
+									"value": "68b00484b36c64377ef05339",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "john"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateServices",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YjJhYjM5NmY3OWQ1YzQ5ZTAwMTljMCIsInJvbGUiOiJ3b3JrZXIiLCJicmFuY2giOiI2OGIyYTQxMjI1YTEwNmNlMjQxOWQ5OTgiLCJsb2NhdGlvbiI6IjY4YjJhNDEyMjVhMTA2Y2UyNDE5ZDk5OCIsImlhdCI6MTc1Njg4MjgzNiwiZXhwIjoxNzU3NDg3NjM2fQ.NDM4xyGVnXsNnyMd8k20w2okjkCaIuN12aRJgMyK18o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"_id\": \"68b7ebc322abffbbed5caf18\",\r\n  \"customerName\": \"John\",\r\n  \"contactPerson\": \"John Smith\",\r\n  \"location\": \"68b2a41225a106ce2419d998\",\r\n  \"makeModel\": \"Isolation Transformer\",\r\n  \"serviceType\": \"PM\",\r\n  \"serialNo\": \"SN987654325\",\r\n  \"complaintDetail\": \"Air conditioner not cooling properly\",\r\n  \"addressDetails\": \"123 Main Street, Apartment 4\",\r\n \r\n  \"contactNo\": \"+1-555-123-4567\",\r\n  \"additionalNote\": \"Prefers to schedule in the morning\",\r\n  \"serviceDate\": \"2025-09-30T09:00:00.000Z\",\r\n  \"assignTo\": [\"68b2ab396f79d5c49e0019c0\"],\r\n  \"status\": \"pending\",\r\n  \"createdAt\": \"2025-09-03T07:18:27.397Z\",\r\n  \"updatedAt\": \"2025-09-03T07:34:37.721Z\",\r\n  \"complaintId\": \"XUFTT18\",\r\n  \"branch\": \"Pallavaram\",\r\n  \"__v\": 0,\r\n  \"customerReview\": {\r\n    \"comment\": \"Excellent service.\",\r\n    \"rating\": 4.5,\r\n    \"signature\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA...\"\r\n  },\r\n  \"invoiceId\": \"6576777\",\r\n  \"invoiceDate\": \"2025-08-25T00:00:00.000Z\",\r\n  \"reshedule\": {\r\n    \"date\": \"2025-10-02T09:00:00.000Z\",\r\n    \"reason\": \"Customer unavailable\",\r\n    \"requestedBy\": \"68b2b30225a106ce2419d999\"\r\n  },\r\n  \"revisitDate\": \"2025-10-04T10:00:00.000Z\",\r\n  \"serviceReport\": {\r\n    \"createdAt\": \"2025-09-30T12:00:00.000Z\",\r\n    \"complaintDescription\": \"Unit was not cooling\",\r\n    \"problemDiagnosed\": \"Compressor issue\",\r\n    \"actionTaken\": \"Replaced compressor\",\r\n    \"partsReplaced\": [\"Compressor\"],\r\n    \"materialUsed\": \"Coolant\",\r\n    \"technicalReadings\": {\r\n      \"inputVoltage\": 230,\r\n      \"outputVoltage\": 220,\r\n      \"current\": 5.5,\r\n      \"powerReading\": 1100\r\n    },\r\n    \"checklist\": {\r\n      \"visualInspection\": true,\r\n      \"connectionChecked\": true,\r\n      \"voltageTest\": true\r\n    }\r\n  },\r\n  \"serviceCost\": 2000,\r\n  \"materialCost\": 500,\r\n  \"totalCost\": 2500\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/services/68b7ebc322abffbbed5caf18",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"services",
+								"68b7ebc322abffbbed5caf18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all services by worker id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YjJhYjM5NmY3OWQ1YzQ5ZTAwMTljMCIsInJvbGUiOiJ3b3JrZXIiLCJicmFuY2giOiI2OGIyYTQxMjI1YTEwNmNlMjQxOWQ5OTgiLCJsb2NhdGlvbiI6IjY4YjJhNDEyMjVhMTA2Y2UyNDE5ZDk5OCIsImlhdCI6MTc1Njg4MjgzNiwiZXhwIjoxNzU3NDg3NjM2fQ.NDM4xyGVnXsNnyMd8k20w2okjkCaIuN12aRJgMyK18o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/services/worker/68b2ab396f79d5c49e0019c0",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"services",
+								"worker",
+								"68b2ab396f79d5c49e0019c0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDashboard",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YjJhNmE5MmYyNGRkYzk2MmZhOTRmOSIsInJvbGUiOiJhZG1pbiIsImJyYW5jaCI6IlBhbGxhdmFyYW0iLCJsb2NhdGlvbiI6IjY4YjJhNDEyMjVhMTA2Y2UyNDE5ZDk5OCIsImlhdCI6MTc1Njg4OTY2MCwiZXhwIjoxNzU3NDk0NDYwfQ.cr5TMF7UlWGuk5m_ywsE1KdgZUjtyObMVuWnC5GOSns",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/services/dashboard",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"services",
+								"dashboard"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getlocationDashboard",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YjJhNmE5MmYyNGRkYzk2MmZhOTRmOSIsInJvbGUiOiJhZG1pbiIsImJyYW5jaCI6IlBhbGxhdmFyYW0iLCJsb2NhdGlvbiI6IjY4YjJhNDEyMjVhMTA2Y2UyNDE5ZDk5OCIsImlhdCI6MTc1Njg4OTY2MCwiZXhwIjoxNzU3NDk0NDYwfQ.cr5TMF7UlWGuk5m_ywsE1KdgZUjtyObMVuWnC5GOSns",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/services/dashboard/68b2a41225a106ce2419d998",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"services",
+								"dashboard",
+								"68b2a41225a106ce2419d998"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getServiceById",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Excel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/services/export/report/68b2ab396f79d5c49e0019c0?startDate=2025-07-01&endDate=2026-07-31&date=2025-07-23",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"services",
+								"export",
+								"report",
+								"68b2ab396f79d5c49e0019c0"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2025-07-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2026-07-31"
+								},
+								{
+									"key": "date",
+									"value": "2025-07-23"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Location",
+			"item": [
+				{
+					"name": "create location",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YWZlNjYwZjA2NmM2NWQ5ZTg2YmMyMiIsInJvbGUiOiJhZG1pbiIsImJyYW5jaCI6Ik1haW4gQnJhbmNoIiwiaWF0IjoxNzU2MzU5Mjk3LCJleHAiOjE3NTY0NDU2OTd9.gyXq99FPepewB2pYnL6Tpn7lt60vPiXPxKbzUE0VNbs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"location\": \"Anna nagar\" }\r\n \r\n  ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/locations",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all locations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/locations",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get location by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/locations/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"locations",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "68b005d1b36c64377ef05347"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update location by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"location\": \"Anna Nagar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/locations/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"locations",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "68b005d1b36c64377ef05347"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete location",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"location\": \"Anna Nagar\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/locations/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"locations",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "68b005d1b36c64377ef05347"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Unique",
+			"item": [
+				{
+					"name": "designation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/unique/designations",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"unique",
+								"designations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "departments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/unique/departments",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"unique",
+								"departments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "servicetype",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/unique/serviceTypes",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"unique",
+								"serviceTypes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "model",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/unique/makeModels",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"unique",
+								"makeModels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDistinctAndLocations",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YjJhZTZlNzNjZWUyNjBhMzYwN2FhNiIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzU2NTQwNjA5LCJleHAiOjE3NTY2MjcwMDl9.d7RXgEV1ErjLj3NyN--3Hi_FdInEV1Guevjia6G7xDk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/unique/getDistinctAndLocations",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"unique",
+								"getDistinctAndLocations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
