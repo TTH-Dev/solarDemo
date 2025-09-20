@@ -40,9 +40,10 @@ import {
   updateProjectProcessStatus,
   updateQuotationStatus,
   updateScheduleStatus,
+  emailHandler,homePayment
 } from "../../controllers/PreSales/leads.js";
 import { protect } from "../../controllers/Admin/admin.js";
-import { uploadCompanyImages } from "../../utils/multerConfig.js";
+import { upload, uploadCompanyImages } from "../../utils/multerConfig.js";
 import { uploadExcel } from "../../utils/multerConfig.js";
 const leadsrouter = express.Router();
 
@@ -69,6 +70,7 @@ leadsrouter.patch("/update-estimates/:leadId", updateEstimateValuesByName);
 leadsrouter.route("/edit-wonStatus/:id").patch(getSalesWonChange);
 
 leadsrouter.patch("/update-quotation-status", updateQuotationStatus);
+leadsrouter.route("/homePayment").get(homePayment);
 
 leadsrouter.patch("/updateScheduleStatus/update-status", updateScheduleStatus);
 
@@ -124,8 +126,10 @@ leadsrouter
 leadsrouter.route("/home-data").get(homeData);
 leadsrouter.route("/home-table").get(homeDataTable);
 leadsrouter.route("/dchallan").post(createdChallan).get(getChallanByLeadId);
-leadsrouter.route("/getByChallanId").get(getChallanById).put(updateChallanById);
+leadsrouter.route("/getByChallanId").get(getChallanById);
+leadsrouter.patch("/getByChallanId", upload.single("deliveryChallan"), updateChallanById);
 leadsrouter.route("/scheduledata").get(getScheduleBy);
+leadsrouter.route('/send-email').post(emailHandler);
 
 leadsrouter
   .route("/:id")

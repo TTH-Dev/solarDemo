@@ -8,61 +8,6 @@ import BOM from "../../models/PreSales/bom.js";
 import mongoose from "mongoose";
 import Admin from "../../models/Admin/admin.js";
 
-
-// export const createCoastedBom = catchAsync(async (req, res, next) => {
-//   const { siteName, qcKw, productTable, structure, systemType, subTotal, total, userId, leadId, bomId } = req.body;
-
-//   const data = {
-//     siteName,
-//     qcKw,
-//     lead: leadId,
-//     bomId,
-//     productTable,
-//     structure, 
-//     systemType,
-//     subTotal,
-//     total,
-//     createdBy: userId,
-//   };
-
-//   const user = await User.findById(userId);
-
-//   // //  Check if a Costed BOM already exists for this bomId
-//   let existingCostedBom = await CoastedBom.findOne({ bomId });
-
-//   if (existingCostedBom) {
-//     return res.status(400).json({
-//       status: "fail",
-//       message: "A Costed BOM has already been created for this BOM ID.",
-//     });
-//   }
-
-//   //  Create new Costed BOM
-//   const coastedBom = await CoastedBom.create(data);
-
-//   const leadData = {
-//     coastedBomId: coastedBom._id,
-//     addedBy: user.name,
-//     addedDate: Date.now(),
-//   };
-
-//   //  Push Costed BOM reference to the lead
-//   const lead = await Leads.findByIdAndUpdate(
-//     leadId,
-//     { $push: { coastedBom: leadData } },
-//     { new: true }
-//   );
-
-//   res.status(200).json({
-//     status: "Success",
-//     message: "Costed BOM created successfully.",
-//     data: {
-//       coastedBom,
-//       lead,
-//     },
-//   });
-// });
-
 export const createCoastedBom = catchAsync(async (req, res, next) => {
    const { siteName, qcKw, productTable, subTotal, total, structure, systemType, userId, leadId } = req.body;
 
@@ -122,47 +67,7 @@ export const createCoastedBom = catchAsync(async (req, res, next) => {
     });
 });
 
-// export const createCoastedBom = catchAsync(async (req, res, next) => {
-//   const { siteName, qcKw, productTable, subTotal, total, structure, systemType, userId, leadId } = req.body;
-
-//   const data = {
-//     siteName: siteName,
-//     qcKw: qcKw,
-//     lead: leadId,
-//     structure,
-//     systemType,
-//     productTable: productTable,
-//     subTotal: subTotal,
-//     total: total
-//   }
-
-//   const user = await User.findById(userId);
-
-//   const coastedBom = await CoastedBom.create(data);
-
-
-//   const leadData = {
-//     coastedBomId: coastedBom._id,
-//     addedBy: user.name,
-//     addedDate: Date.now()
-//   }
-
-//   const lead = await Leads.findByIdAndUpdate(
-//     leadId,
-//     { $push: { coastedBom: leadData } },
-//     { new: true }
-//   );
-
-//   res.status(200).json({
-//     status: "Success",
-//     data: {
-//       coastedBom,
-//       lead
-//     }
-//   });
-// });
-
-export const getAllCoastedBom = catchAsync(async (req, res, next) => {
+export const getAllCoastedBom = catchAsync(async (req, res) => {
   const limit = req.query.limit || 10;
   const page = req.query.page || 1;
 

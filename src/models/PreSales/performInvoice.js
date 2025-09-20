@@ -24,6 +24,7 @@ const productSchema = new mongoose.Schema({
       storedFilename: String,
       path: String,
       uploadedAt: Date,
+      vendorId: { type: mongoose.Schema.Types.ObjectId, ref: "Vendor", required: true },
     }
   ]
 

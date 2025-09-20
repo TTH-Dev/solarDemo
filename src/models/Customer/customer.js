@@ -6,7 +6,6 @@ const customerSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Leads",
   },
-
   companyName: {
     type: String
   },
@@ -34,4 +33,5 @@ const customerSchema = new mongoose.Schema({
   { timestamps: true });
 
 const Customer = mongoose.model("Customer", customerSchema);
+
 export default Customer;

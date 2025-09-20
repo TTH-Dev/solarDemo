@@ -1,0 +1,3016 @@
+{
+	"info": {
+		"_postman_id": "459fe0e8-9340-409a-a297-a99275d12da4",
+		"name": "PAYPLUS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43378669",
+		"_collection_link": "https://galactic-rocket-536746.postman.co/workspace/b6149fa7-3c10-414c-a897-30f3a6434c01/collection/37645485-459fe0e8-9340-409a-a297-a99275d12da4?action=share&source=collection_link&creator=43378669"
+	},
+	"item": [
+		{
+			"name": "ADMIN",
+			"item": [
+				{
+					"name": "ADMIN SIGNUP",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQ5OGMzOWJkYWI1NmVmYTZlMDA2MWUiLCJpYXQiOjE3MzM1NDkwMjUsImV4cCI6MTc0MTMyNTAyNX0.ZIDCEUTnYQyjvnX_VGPA38E_izZabIiK395eRjbKSXY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \" Goku\",\r\n    \"email\": \"lejonavr@gmail.com\",\r\n\"password\"  : \"Antro123\",\r\n\"phone\" : \"7339383839\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/auth/signup",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADMIN LOGIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"email\": \"lejonavr@gmail.com\",\r\n    \"password\" : \"admin123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/auth/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADMIN RESET PASSWORD",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"password\" : \"admin@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/auth//resetPassword/34c9f8a7c4744607d1167bd7d3951439ec0a8303bb9ba64971fab12ee5a94140",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"",
+								"resetPassword",
+								"34c9f8a7c4744607d1167bd7d3951439ec0a8303bb9ba64971fab12ee5a94140"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADMIN SIGNUP OTP VERIFY ",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"otp\" : 7987\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/auth/otpVerify",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"otpVerify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADMIN FORGOTPASSWORD",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"lejonavr@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/auth/forgotPassword",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"forgotPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ADMIN",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzU3ZGRhZTYxZjVkOTk2NmNhNTI1NDkiLCJpYXQiOjE3MzQ2ODg4NDQsImV4cCI6MTczNTI5MzY0NH0.F_Kdv00RSYAbBQycsNeLsC1Kh3fakuaKiMHGKCcgX-o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/auth/getMe",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"getMe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Resnd OTP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imxlam9uYXZyQGdtYWlsLmNvbSIsIm5hbWUiOiIgR29rdSIsInBhc3N3b3JkIjoiQW50cm8xMjMiLCJwaG9uZSI6IjczMzkzODM4MzkiLCJvdHAiOiI2MjkyIiwib3RwRXhwaXJlcyI6MTczNDk1MDEwOTM3NSwiaWF0IjoxNzM0OTQ5ODA5LCJleHAiOjE3MzQ5NTA0MDl9.JPkUCys0NPAhA37tSXVALiGGuKwoDgZVnmXOiQSyyBM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/auth/resendOtp",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"resendOtp"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Company",
+			"item": [
+				{
+					"name": "Company Bank Details Adding",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"bankDetails\" : {\r\n  \"accountHolderName\": \"John Doe\",\r\n  \"accountNumber\": 123456789012,\r\n  \"IFSCCode\": \"SBIN0001234\"\r\n}\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/company/6757eb4a86ac2c2b3abd332d",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"company",
+								"6757eb4a86ac2c2b3abd332d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Company  image Adding",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Companyimage",
+									"type": "file",
+									"src": "postman-cloud:///1efa2400-835e-4090-8ddd-c9ee1c17afe2"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/company",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"company"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Company ",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/company/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"company",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Comapany By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/company/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"company",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Comapany ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/company",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"company"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Company Overview Report ",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/company/overview",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"company",
+								"overview"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "attendance Location",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"attendanceLocation\": {\r\n    \"location\": \"123 Main Street, Los Angeles\",\r\n    \"range\": 500\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/company/676952e847828901c4be88a6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"company",
+								"676952e847828901c4be88a6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Leave Setup",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"leavesetup\": [\r\n    {\r\n      \"categoryName\": \"Sick Leave\",\r\n      \"TotalDays\": 12,\r\n      \"ToatalDaysInMonths\": 1\r\n    },\r\n    {\r\n      \"categoryName\": \"Casual Leave\",\r\n      \"TotalDays\": 8,\r\n      \"ToatalDaysInMonths\": 0.66\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/company/676952e847828901c4be88a6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"company",
+								"676952e847828901c4be88a6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Leave Pie Chart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/company/leave/676952e847828901c4be88a6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"company",
+								"leave",
+								"676952e847828901c4be88a6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing Field Percentage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/company/progress/676952e847828901c4be88a6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"company",
+								"progress",
+								"676952e847828901c4be88a6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "company Adding Sinle One ",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "OrganizationLogo",
+									"type": "file",
+									"src": "postman-cloud:///1efa2400-835e-4090-8ddd-c9ee1c17afe2"
+								},
+								{
+									"key": "OrganizationName",
+									"value": "HLLKART",
+									"type": "text"
+								},
+								{
+									"key": "websiteLink",
+									"value": "hllkart.in",
+									"type": "text"
+								},
+								{
+									"key": "address.address",
+									"value": "7/139 ",
+									"type": "text"
+								},
+								{
+									"key": "address.state",
+									"value": "Tamilnadu",
+									"type": "text"
+								},
+								{
+									"key": "address.city",
+									"value": "Chennai",
+									"type": "text"
+								},
+								{
+									"key": "address.pincode",
+									"value": "6927808",
+									"type": "text"
+								},
+								{
+									"key": "contactInformation.contactNo",
+									"value": "7339282079",
+									"type": "text"
+								},
+								{
+									"key": "contactInformation.emailId",
+									"value": "lejoavr@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "taxDetails.gstNo",
+									"value": "1311",
+									"type": "text"
+								},
+								{
+									"key": "taxDetails.tan",
+									"value": "2813",
+									"type": "text"
+								},
+								{
+									"key": "taxDetails.pan",
+									"value": "0211",
+									"type": "text"
+								},
+								{
+									"key": "branches",
+									"value": "[\"Chennai\"]",
+									"type": "text"
+								},
+								{
+									"key": "industry",
+									"value": "[\"Steel\"]",
+									"type": "text"
+								},
+								{
+									"key": "subIndustry",
+									"value": "[\"ss\",\"iron\"]",
+									"type": "text"
+								},
+								{
+									"key": "departments",
+									"value": "[\"mechanical\",\"velding\"]",
+									"type": "text"
+								},
+								{
+									"key": "payroll.payrollType",
+									"value": "Monthly",
+									"type": "text"
+								},
+								{
+									"key": "payroll.payrollDates.Startdate",
+									"value": "2025-01-01",
+									"type": "text"
+								},
+								{
+									"key": "payroll.payrollDates.Enddate",
+									"value": "2025-01-31",
+									"type": "text"
+								},
+								{
+									"key": "attendanceLocation.location",
+									"value": "Chennai",
+									"type": "text"
+								},
+								{
+									"key": "attendanceLocation.range",
+									"value": "1000",
+									"type": "text"
+								},
+								{
+									"key": "businessDocuments",
+									"type": "file",
+									"src": "postman-cloud:///1efa2400-835e-4090-8ddd-c9ee1c17afe2"
+								},
+								{
+									"key": "signatureStampDocument",
+									"type": "file",
+									"src": "postman-cloud:///1efa1911-3ecf-4180-a506-a75781618976"
+								},
+								{
+									"key": "signatureForm16Document",
+									"type": "file",
+									"src": "postman-cloud:///1ef8dfe6-c0d8-4650-a4b6-d18efd3e4fe9"
+								},
+								{
+									"key": "bankDetails.accountHolderName",
+									"value": "Lejo S",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.accountNumber",
+									"value": "586548565",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.IFSCCode",
+									"value": "8587458123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/company",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"company"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "company NoticeAdd",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Attachments",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "companyId",
+									"value": "676952e847828901c4be88a6",
+									"type": "text"
+								},
+								{
+									"key": "publishingDate",
+									"value": "2025-01-05",
+									"type": "text"
+								},
+								{
+									"key": "publishingTime",
+									"value": "09:00",
+									"type": "text"
+								},
+								{
+									"key": "sendTo",
+									"value": "[Employees]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/company/NoticeAdd",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"company",
+								"NoticeAdd"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employee",
+			"item": [
+				{
+					"name": "Add Employee ",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "profilePhoto",
+									"type": "file",
+									"src": "postman-cloud:///1efa1911-3ecf-4180-a506-a75781618976"
+								},
+								{
+									"key": "firstName",
+									"value": "Antro",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Lejon S",
+									"type": "text"
+								},
+								{
+									"key": "emailId",
+									"value": "lejojerry@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "dateOfBirth",
+									"value": "2003-02-28",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "Male",
+									"type": "text"
+								},
+								{
+									"key": "workType",
+									"value": "Full-time",
+									"type": "text"
+								},
+								{
+									"key": "currentAddress",
+									"value": "7/139 Anna Colony",
+									"type": "text"
+								},
+								{
+									"key": "employeeId",
+									"value": "EMP001",
+									"type": "text"
+								},
+								{
+									"key": "phoneNo",
+									"value": "7339282079",
+									"type": "text"
+								},
+								{
+									"key": "bloodGroup",
+									"value": "B-",
+									"type": "text"
+								},
+								{
+									"key": "maritalStatus",
+									"value": "Married",
+									"type": "text"
+								},
+								{
+									"key": "permanentAddress",
+									"value": "7/139 Anna Colony",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/employee",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"employee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Employee Job info",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"punchIn\" :  \"09:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/employee//getbyid/676a6092dadf88dddf59660e",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"employee",
+								"",
+								"getbyid",
+								"676a6092dadf88dddf59660e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Employee Documents ",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "IDproof",
+									"type": "file",
+									"src": "postman-cloud:///1efa1911-3ecf-4180-a506-a75781618976"
+								},
+								{
+									"key": "SchoolTC",
+									"type": "file",
+									"src": "postman-cloud:///1ef8dfe6-d12c-4150-ae2c-99c6be3b466d"
+								},
+								{
+									"key": "ExperienceCertificate",
+									"type": "file",
+									"src": "postman-cloud:///1ef8dfe6-c0d8-4650-a4b6-d18efd3e4fe9"
+								},
+								{
+									"key": "PanCard",
+									"type": "file",
+									"src": "postman-cloud:///1ef8dfe6-c03c-4250-8df7-1bcdafa9881d"
+								},
+								{
+									"key": "CollegeTC",
+									"type": "file",
+									"src": "postman-cloud:///1ef8dfe6-bf1e-4800-bce5-4f0a975fc441"
+								},
+								{
+									"key": "PaySlip",
+									"type": "file",
+									"src": "postman-cloud:///1efa1911-3ecf-4180-a506-a75781618976"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/employee/67654323b29b0f0b6c8e66a6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"employee",
+								"67654323b29b0f0b6c8e66a6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Employee Bank Details ",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"bankDetails\": {\r\n    \"accountHolderName\": \"John Doe\",\r\n    \"accountType\": \"Savings\",\r\n    \"pfNo\": \"1234567890\",\r\n    \"esicNo\": \"ESIC123456\",\r\n    \"accountNo\": \"9876543210\",\r\n    \"ifscCode\": \"SBIN0001234\",\r\n    \"uanNo\": \"UAN123456789\",\r\n    \"panCardNo\": \"ABCDE1234F\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/employee/67654323b29b0f0b6c8e66a6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"employee",
+								"67654323b29b0f0b6c8e66a6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Employees",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"attendanceStatus\" :\"Absent\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/employee",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"employee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dynamic Full employee Details Adding",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "companyId",
+									"value": "676952e847828901c4be88a6",
+									"type": "text"
+								},
+								{
+									"key": "profileimage",
+									"type": "file",
+									"src": "postman-cloud:///1efa1911-3ecf-4180-a506-a75781618976"
+								},
+								{
+									"key": "firstName",
+									"value": "ANTRO",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "LEJON S",
+									"type": "text"
+								},
+								{
+									"key": "emailId",
+									"value": "lej88@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "dateOfBirth",
+									"value": "2003-01-01",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "Male",
+									"type": "text"
+								},
+								{
+									"key": "workType",
+									"value": "Full-time",
+									"type": "text"
+								},
+								{
+									"key": "currentAddress",
+									"value": "Anna Colony",
+									"type": "text"
+								},
+								{
+									"key": "phoneNo",
+									"value": "960065238",
+									"type": "text"
+								},
+								{
+									"key": "bloodGroup",
+									"value": "B-ve",
+									"type": "text"
+								},
+								{
+									"key": "maritalStatus",
+									"value": "Married",
+									"type": "text"
+								},
+								{
+									"key": "permanentAddress",
+									"value": "7/139 Anna Colony",
+									"type": "text"
+								},
+								{
+									"key": "attendanceStatus",
+									"value": "Present",
+									"type": "text"
+								},
+								{
+									"key": "shift.shiftId",
+									"value": "6772291b6ede3090c3573ee4",
+									"type": "text"
+								},
+								{
+									"key": "shift.startDate",
+									"value": "2025-01-01",
+									"type": "text"
+								},
+								{
+									"key": "shift.endDate",
+									"value": "2025-01-12",
+									"type": "text"
+								},
+								{
+									"key": "shift.Duration",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "shift.shiftRepetition",
+									"value": "Repeated",
+									"type": "text"
+								},
+								{
+									"key": "shift.RepeatEvery",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "resume",
+									"type": "file",
+									"src": "postman-cloud:///1efa1911-3ecf-4180-a506-a75781618976"
+								},
+								{
+									"key": "jobInfo.department",
+									"value": "IT",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.position",
+									"value": "Developer",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.paymentType",
+									"value": "Monthly",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.paymentAmount",
+									"value": "1200000",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.workMode",
+									"value": "Work from office",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.branch",
+									"value": "Chennai",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.jobCategory",
+									"value": "On site",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.previousSalary",
+									"value": "600000",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.overtimeRate",
+									"value": "1200",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.attendanceLocation",
+									"value": "Chennai",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.dateOfJoining",
+									"value": "2025-01-01",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.dailyWorkHr",
+									"value": "8",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.overtimePerHr",
+									"value": "1200",
+									"type": "text"
+								},
+								{
+									"key": "IDproof",
+									"type": "file",
+									"src": "postman-cloud:///1efa1911-3ecf-4180-a506-a75781618976"
+								},
+								{
+									"key": "SchoolTC",
+									"type": "file",
+									"src": "postman-cloud:///1ef8dfe6-bf1e-4800-bce5-4f0a975fc441"
+								},
+								{
+									"key": "ExperienceCertificate",
+									"type": "file",
+									"src": "postman-cloud:///1efa1911-3ecf-4180-a506-a75781618976"
+								},
+								{
+									"key": "PanCard",
+									"type": "file",
+									"src": "postman-cloud:///1ef8dfe6-bf1e-4800-bce5-4f0a975fc441"
+								},
+								{
+									"key": "CollegeTC",
+									"type": "file",
+									"src": "postman-cloud:///1ef8dfe6-d12c-4150-ae2c-99c6be3b466d"
+								},
+								{
+									"key": "PaySlip",
+									"type": "file",
+									"src": "postman-cloud:///1efa1911-3ecf-4180-a506-a75781618976"
+								},
+								{
+									"key": "bankDetails.accountHolderName",
+									"value": "ANTRO LEJON S",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.accountType",
+									"value": "Savings",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.pfNo",
+									"value": "458689",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.esicNo",
+									"value": "586485",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.accountNo",
+									"value": "85612586",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.ifscCode",
+									"value": "58548266",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.uanNo",
+									"value": "584668",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.panCardNo",
+									"value": "1236588",
+									"type": "text"
+								},
+								{
+									"key": "fieldNames",
+									"value": "[\"Department\", \"Country\"]",
+									"type": "text"
+								},
+								{
+									"key": "fieldValues",
+									"value": "[\"IT\", \"India\"]",
+									"type": "text"
+								},
+								{
+									"key": "fileNames",
+									"value": "[xerox1]",
+									"type": "text"
+								},
+								{
+									"key": "xerox1",
+									"type": "file",
+									"src": "postman-cloud:///1ef8d492-641c-4bf0-8298-a6316a33a583"
+								},
+								{
+									"key": "xerox2",
+									"type": "file",
+									"src": "postman-cloud:///1ef8dfe6-bf20-4f10-82e2-0fb5699ff766"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/employee/addField",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"employee",
+								"addField"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dynamic Full employee Details Adding Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "companyId",
+									"value": "676952e847828901c4be88a6",
+									"type": "text"
+								},
+								{
+									"key": "profileimage",
+									"type": "file",
+									"src": "postman-cloud:///1efa1911-3ecf-4180-a506-a75781618976"
+								},
+								{
+									"key": "firstName",
+									"value": "ANTRO",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "LEJON S",
+									"type": "text"
+								},
+								{
+									"key": "emailId",
+									"value": "lej88@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "dateOfBirth",
+									"value": "2003-01-01",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "Male",
+									"type": "text"
+								},
+								{
+									"key": "workType",
+									"value": "Full-time",
+									"type": "text"
+								},
+								{
+									"key": "currentAddress",
+									"value": "Anna Colony",
+									"type": "text"
+								},
+								{
+									"key": "phoneNo",
+									"value": "960065238",
+									"type": "text"
+								},
+								{
+									"key": "bloodGroup",
+									"value": "B-ve",
+									"type": "text"
+								},
+								{
+									"key": "maritalStatus",
+									"value": "Married",
+									"type": "text"
+								},
+								{
+									"key": "permanentAddress",
+									"value": "7/139 Anna Colony",
+									"type": "text"
+								},
+								{
+									"key": "attendanceStatus",
+									"value": "Present",
+									"type": "text"
+								},
+								{
+									"key": "shift.shiftId",
+									"value": "6772291b6ede3090c3573ee4",
+									"type": "text"
+								},
+								{
+									"key": "shift.startDate",
+									"value": "2025-01-01",
+									"type": "text"
+								},
+								{
+									"key": "shift.endDate",
+									"value": "2025-01-12",
+									"type": "text"
+								},
+								{
+									"key": "shift.Duration",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "shift.shiftRepetition",
+									"value": "Repeated",
+									"type": "text"
+								},
+								{
+									"key": "shift.RepeatEvery",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "resume",
+									"type": "file",
+									"src": "postman-cloud:///1efa1911-3ecf-4180-a506-a75781618976"
+								},
+								{
+									"key": "jobInfo.department",
+									"value": "IT",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.position",
+									"value": "Developer",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.paymentType",
+									"value": "Monthly",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.paymentAmount",
+									"value": "1200000",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.workMode",
+									"value": "Work from office",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.branch",
+									"value": "Chennai",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.jobCategory",
+									"value": "On site",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.previousSalary",
+									"value": "600000",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.overtimeRate",
+									"value": "1200",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.attendanceLocation",
+									"value": "Chennai",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.dateOfJoining",
+									"value": "2025-01-01",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.dailyWorkHr",
+									"value": "8",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.overtimePerHr",
+									"value": "1200",
+									"type": "text"
+								},
+								{
+									"key": "IDproof",
+									"type": "file",
+									"src": "postman-cloud:///1efa1911-3ecf-4180-a506-a75781618976"
+								},
+								{
+									"key": "SchoolTC",
+									"type": "file",
+									"src": "postman-cloud:///1ef8dfe6-bf1e-4800-bce5-4f0a975fc441"
+								},
+								{
+									"key": "ExperienceCertificate",
+									"type": "file",
+									"src": "postman-cloud:///1efa1911-3ecf-4180-a506-a75781618976"
+								},
+								{
+									"key": "PanCard",
+									"type": "file",
+									"src": "postman-cloud:///1ef8dfe6-bf1e-4800-bce5-4f0a975fc441"
+								},
+								{
+									"key": "CollegeTC",
+									"type": "file",
+									"src": "postman-cloud:///1ef8dfe6-d12c-4150-ae2c-99c6be3b466d"
+								},
+								{
+									"key": "PaySlip",
+									"type": "file",
+									"src": "postman-cloud:///1efa1911-3ecf-4180-a506-a75781618976"
+								},
+								{
+									"key": "bankDetails.accountHolderName",
+									"value": "ANTRO LEJON S",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.accountType",
+									"value": "Savings",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.pfNo",
+									"value": "458689",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.esicNo",
+									"value": "586485",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.accountNo",
+									"value": "85612586",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.ifscCode",
+									"value": "58548266",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.uanNo",
+									"value": "584668",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.panCardNo",
+									"value": "1236588",
+									"type": "text"
+								},
+								{
+									"key": "fieldNames",
+									"value": "[\"Department\", \"Country\"]",
+									"type": "text"
+								},
+								{
+									"key": "fieldValues",
+									"value": "[\"IT\", \"India\"]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/employee/addField",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"employee",
+								"addField"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Full employee Details Adding",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "companyId",
+									"value": "676952e847828901c4be88a6",
+									"type": "text"
+								},
+								{
+									"key": "profileimage",
+									"type": "file",
+									"src": "postman-cloud:///1efa1911-3ecf-4180-a506-a75781618976"
+								},
+								{
+									"key": "firstName",
+									"value": "ANTRO",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "LEJON S",
+									"type": "text"
+								},
+								{
+									"key": "emailId",
+									"value": "lej88@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "dateOfBirth",
+									"value": "2003-01-01",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "Male",
+									"type": "text"
+								},
+								{
+									"key": "workType",
+									"value": "Full-time",
+									"type": "text"
+								},
+								{
+									"key": "currentAddress",
+									"value": "Anna Colony",
+									"type": "text"
+								},
+								{
+									"key": "phoneNo",
+									"value": "960065238",
+									"type": "text"
+								},
+								{
+									"key": "bloodGroup",
+									"value": "B-ve",
+									"type": "text"
+								},
+								{
+									"key": "maritalStatus",
+									"value": "Married",
+									"type": "text"
+								},
+								{
+									"key": "permanentAddress",
+									"value": "7/139 Anna Colony",
+									"type": "text"
+								},
+								{
+									"key": "attendanceStatus",
+									"value": "Present",
+									"type": "text"
+								},
+								{
+									"key": "shift.shiftId",
+									"value": "6772291b6ede3090c3573ee4",
+									"type": "text"
+								},
+								{
+									"key": "shift.startDate",
+									"value": "2025-01-01",
+									"type": "text"
+								},
+								{
+									"key": "shift.endDate",
+									"value": "2025-01-12",
+									"type": "text"
+								},
+								{
+									"key": "shift.Duration",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "shift.shiftRepetition",
+									"value": "Repeated",
+									"type": "text"
+								},
+								{
+									"key": "shift.RepeatEvery",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "resume",
+									"type": "file",
+									"src": "postman-cloud:///1efa1911-3ecf-4180-a506-a75781618976"
+								},
+								{
+									"key": "jobInfo.department",
+									"value": "IT",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.position",
+									"value": "Developer",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.paymentType",
+									"value": "Monthly",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.paymentAmount",
+									"value": "1200000",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.workMode",
+									"value": "Work from office",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.branch",
+									"value": "Chennai",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.jobCategory",
+									"value": "On site",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.previousSalary",
+									"value": "600000",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.overtimeRate",
+									"value": "1200",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.attendanceLocation",
+									"value": "Chennai",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.dateOfJoining",
+									"value": "2025-01-01",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.dailyWorkHr",
+									"value": "8",
+									"type": "text"
+								},
+								{
+									"key": "jobInfo.overtimePerHr",
+									"value": "1200",
+									"type": "text"
+								},
+								{
+									"key": "IDproof",
+									"type": "file",
+									"src": "postman-cloud:///1efa1911-3ecf-4180-a506-a75781618976"
+								},
+								{
+									"key": "SchoolTC",
+									"type": "file",
+									"src": "postman-cloud:///1ef8dfe6-bf1e-4800-bce5-4f0a975fc441"
+								},
+								{
+									"key": "ExperienceCertificate",
+									"type": "file",
+									"src": "postman-cloud:///1efa1911-3ecf-4180-a506-a75781618976"
+								},
+								{
+									"key": "PanCard",
+									"type": "file",
+									"src": "postman-cloud:///1ef8dfe6-bf1e-4800-bce5-4f0a975fc441"
+								},
+								{
+									"key": "CollegeTC",
+									"type": "file",
+									"src": "postman-cloud:///1ef8dfe6-d12c-4150-ae2c-99c6be3b466d"
+								},
+								{
+									"key": "PaySlip",
+									"type": "file",
+									"src": "postman-cloud:///1efa1911-3ecf-4180-a506-a75781618976"
+								},
+								{
+									"key": "bankDetails.accountHolderName",
+									"value": "ANTRO LEJON S",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.accountType",
+									"value": "Savings",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.pfNo",
+									"value": "458689",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.esicNo",
+									"value": "586485",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.accountNo",
+									"value": "85612586",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.ifscCode",
+									"value": "58548266",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.uanNo",
+									"value": "584668",
+									"type": "text"
+								},
+								{
+									"key": "bankDetails.panCardNo",
+									"value": "1236588",
+									"type": "text"
+								},
+								{
+									"key": "fieldNames",
+									"value": "[\"Department\", \"Country\"]",
+									"type": "text"
+								},
+								{
+									"key": "fieldValues",
+									"value": "[\"IT\", \"India\"]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/employee/addField",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"employee",
+								"addField"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Leave-Request",
+			"item": [
+				{
+					"name": "Leave-Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"employeeId\" : \"676a6092dadf88dddf59660e\",\r\n    \"companyId\" : \"676952e847828901c4be88a6\",\r\n    \"leaveDate\": \"2024-12-24\",\r\n  \"status\": \"Approved\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/leave-request",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"leave-request"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PLANS",
+			"item": [
+				{
+					"name": "{{URL}}/api/plans",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Standard\",\r\n  \"price\": 25,\r\n  \"duration\": 90,\r\n  \"EndDate\": \"2025-04-12\",\r\n  \"features\": {\r\n    \"description\": \"This plan includes standard access for admins, sub admins, and employees.\",\r\n    \"Admin\": 1,\r\n    \"SubAdmin\": 5,\r\n    \"Employee\": 100\r\n  }\r\n  }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/plans",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"plans"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "INDUSTRY",
+			"item": [
+				{
+					"name": "Get All Industries Names ",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subIndustries\": [\"Antro\",\"lejon\",\"Goku\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/industries/names",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"industries",
+								"names"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD SUBINDUSTRY",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subIndustries\": [\"Antro\",\"lejon\",\"Goku\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/industries/:ID",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"industries",
+								":ID"
+							],
+							"variable": [
+								{
+									"key": "ID",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Industry",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"industry\" : \"TECH\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/industries",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"industries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Industries ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/industries",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"industries"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "shift",
+			"item": [
+				{
+					"name": "GET ALL SHIFT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/shift",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"shift"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Shiftt",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Generate a dynamic ObjectId (for testing purposes)\r",
+									"function generateObjectId() {\r",
+									"    return Math.random().toString(16).substr(2, 8) + \r",
+									"           Math.random().toString(16).substr(2, 8) + \r",
+									"           Math.random().toString(16).substr(2, 8);\r",
+									"}\r",
+									"\r",
+									"// Create dynamic firstWeekInfo objects\r",
+									"const firstWeekInfo = [\r",
+									"    {\r",
+									"        NoOfWorkingDays: [\"Monday\", \"Tuesday\", \"Wednesday\", \"Thursday\", \"Friday\"],\r",
+									"        NoOfLeaveDays: [\"Saturday\", \"Sunday\"],\r",
+									"        workingDays: [\"Monday\", \"Tuesday\", \"Wednesday\", \"Thursday\", \"Friday\"],\r",
+									"        startTime: \"09:00\",\r",
+									"        endTime: \"17:00\",\r",
+									"        breakTimeOut: \"11:00\",\r",
+									"        breakTimeIn: \"11:15\",\r",
+									"        lunchTimeOut: \"13:00\",\r",
+									"        lunchTimeIn: \"14:00\",\r",
+									"        minPunchTime: \"08:45\",\r",
+									"        maxPunchTime: \"09:15\",\r",
+									"        totalWorkingHours: 8,\r",
+									"        maxPunchOutTime: \"17:15\",\r",
+									"        lastCustomizeWeekPoint: \"Custom point example 1\"\r",
+									"    },\r",
+									"    {\r",
+									"        NoOfWorkingDays: [\"Monday\", \"Wednesday\", \"Friday\"],\r",
+									"        NoOfLeaveDays: [\"Tuesday\", \"Thursday\", \"Saturday\", \"Sunday\"],\r",
+									"        workingDays: [\"Monday\", \"Wednesday\", \"Friday\"],\r",
+									"        startTime: \"10:00\",\r",
+									"        endTime: \"18:00\",\r",
+									"        breakTimeOut: \"12:00\",\r",
+									"        breakTimeIn: \"12:15\",\r",
+									"        lunchTimeOut: \"14:00\",\r",
+									"        lunchTimeIn: \"15:00\",\r",
+									"        minPunchTime: \"09:45\",\r",
+									"        maxPunchTime: \"10:15\",\r",
+									"        totalWorkingHours: 7,\r",
+									"        maxPunchOutTime: \"18:15\",\r",
+									"        lastCustomizeWeekPoint: \"Custom point example 2\"\r",
+									"    }\r",
+									"];\r",
+									"\r",
+									"// Set the request body dynamically\r",
+									"pm.environment.set(\"requestBody\", JSON.stringify({\r",
+									"    companyId: generateObjectId(),\r",
+									"    shiftName: \"Dynamic Morning Shift\",\r",
+									"    firstWeekInfo\r",
+									"}));\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"companyId\": \"676952e847828901c4be88a6\",\r\n  \"shiftName\": \"MorningB Shift\",\r\n  \"branch\" : \"Chennai\",\r\n  \"weekInfo\": [\r\n    {\r\n      \"NoOfWorkingDays\": [\"Monday\", \"Tuesday\", \"Wednesday\", \"Thursday\", \"Friday\"],\r\n      \"NoOfLeaveDays\": [\"Saturday\", \"Sunday\"],\r\n      \"workingDays\": [\"Monday\", \"Tuesday\", \"Wednesday\", \"Thursday\", \"Friday\"],\r\n      \"startTime\": \"09:00\",\r\n      \"endTime\": \"17:00\",\r\n      \"breakTimeOut\": \"11:00\",\r\n      \"breakTimeIn\": \"11:15\",\r\n      \"lunchTimeOut\": \"13:00\",\r\n      \"lunchTimeIn\": \"14:00\",\r\n      \"minPunchTime\": \"08:45\",\r\n      \"maxPunchTime\": \"09:15\",\r\n      \"totalWorkingHours\": 8,\r\n      \"maxPunchOutTime\": \"17:15\",\r\n      \"lastCustomizeWeekPoint\": \"Custom point example 1\"\r\n    },\r\n    {\r\n      \"NoOfWorkingDays\": [\"Monday\", \"Wednesday\", \"Friday\"],\r\n      \"NoOfLeaveDays\": [\"Tuesday\", \"Thursday\", \"Saturday\", \"Sunday\"],\r\n      \"workingDays\": [\"Monday\", \"Wednesday\", \"Friday\"],\r\n      \"startTime\": \"10:00\",\r\n      \"endTime\": \"18:00\",\r\n      \"breakTimeOut\": \"12:00\",\r\n      \"breakTimeIn\": \"12:15\",\r\n      \"lunchTimeOut\": \"14:00\",\r\n      \"lunchTimeIn\": \"15:00\",\r\n      \"minPunchTime\": \"09:45\",\r\n      \"maxPunchTime\": \"10:15\",\r\n      \"totalWorkingHours\": 7,\r\n      \"maxPunchOutTime\": \"18:15\",\r\n      \"lastCustomizeWeekPoint\": \"Custom point example 2\"\r\n    }\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/shift/allnames",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"shift",
+								"allnames"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Leave Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/leave-request",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"leave-request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Shift",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shiftName\" : \"Night Shift\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/shift/67722ab16ede3090c3573ee8",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"shift",
+								"67722ab16ede3090c3573ee8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Shift NAmes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/shift/allnames",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"shift",
+								"allnames"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DropMenu For Filters ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/company/dmDeatails?companyId=676952e847828901c4be88a6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"company",
+								"dmDeatails"
+							],
+							"query": [
+								{
+									"key": "companyId",
+									"value": "676952e847828901c4be88a6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "filterEmployeeByShift",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Create Customer ",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2FkOTAyOGM2MTFkYjczYThkYjY2NzAiLCJpYXQiOjE3NDI0NzQwNTgsImV4cCI6MTc1MDI1MDA1OH0.N-HOwx_ANFBG51Up1GV9-BbTC5LngovPnjLBSQx3uMI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"companyDetail\": {\r\n    \"companyName\": \"Tech Solutions Pvt Ltd\",\r\n    \"companyNumber\": \"TS123456\",\r\n    \"companyEmailId\": \"contact@techsolutions.com\",\r\n    \"gstNumber\": 123456789012\r\n  },\r\n  \"billingAddress\": {\r\n    \"organizationAddress\": \"123, IT Park, Chennai\",\r\n    \"city\": \"Chennai\",\r\n    \"state\": \"Tamil Nadu\",\r\n    \"pincode\": 600032,\r\n    \"sameAddressToggle\": true\r\n  },\r\n  \"contactPersonDetail\": {\r\n    \"ContactName\": \"Rajesh Kumar\",\r\n    \"phoneNumber\": 9876543210,\r\n    \"emialId\": \"rajesh.kumar@techsolutions.com\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/customer",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Customers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2FkOTAyOGM2MTFkYjczYThkYjY2NzAiLCJpYXQiOjE3Mzk5NjYzNjcsImV4cCI6MTc0Nzc0MjM2N30.6UQAGRCUDfa4W-VwvmDWVqYEUMbrcNY3bUMnyMUuGXk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/customer/filter",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"customer",
+								"filter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer Fillter",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/customer/filter?emailId=&page=2&limit=2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"customer",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "emailId",
+									"value": ""
+								},
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Del Customer",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/customer/getById/67dc06bc306ed224a951b8ae",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"customer",
+								"getById",
+								"67dc06bc306ed224a951b8ae"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dmmenu For Customer ",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/customer/dmenu?fields=companyDetail",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"customer",
+								"dmenu"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "companyDetail"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invoice",
+			"item": [
+				{
+					"name": "Get All Invoice ",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2FkOTAyOGM2MTFkYjczYThkYjY2NzAiLCJpYXQiOjE3Mzk5NjYzNjcsImV4cCI6MTc0Nzc0MjM2N30.6UQAGRCUDfa4W-VwvmDWVqYEUMbrcNY3bUMnyMUuGXk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/invoice",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"invoice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Invoice",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2FkOTAyOGM2MTFkYjczYThkYjY2NzAiLCJpYXQiOjE3Mzk5NjYzNjcsImV4cCI6MTc0Nzc0MjM2N30.6UQAGRCUDfa4W-VwvmDWVqYEUMbrcNY3bUMnyMUuGXk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"companyName\": \"Tech Solutions Pvt Ltd\",\r\n  \"invoiceDate\": \"2025-02-18T12:00:00Z\",\r\n  \"paymentMode\": \"upi\",\r\n  \"customerId\" : \"67d26596379b727843507993\",\r\n\r\n  \"services\": [\r\n    {\r\n      \"serviceDescription\": \"Software Development\",\r\n      \"duration\": \"6 months\",\r\n      \"serviceCharges\": 50000,\r\n      \"tax\": \"18%\",\r\n      \"taxAmount\": 9000,\r\n      \"totalAmount\": 59000\r\n    },\r\n    {\r\n      \"serviceDescription\": \"Maintenance & Support\",\r\n      \"duration\": \"1 year\",\r\n      \"serviceCharges\": 20000,\r\n      \"tax\": \"18%\",\r\n      \"taxAmount\": 3600,\r\n      \"totalAmount\": 23600\r\n    }\r\n  ],\r\n  \"discount\": 1000,\r\n  \"anyCharges\": 500,\r\n  \"total\": 82100\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/invoice",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"invoice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Invoice",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/invoice/67b56dcab97f75113ee7fe64",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"invoice",
+								"67b56dcab97f75113ee7fe64"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter Invoive",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2FkOTAyOGM2MTFkYjczYThkYjY2NzAiLCJpYXQiOjE3NDI0NzQwNTgsImV4cCI6MTc1MDI1MDA1OH0.N-HOwx_ANFBG51Up1GV9-BbTC5LngovPnjLBSQx3uMI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/invoice/filter?companyName=&invoiceNo=&customerName=",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"invoice",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "companyName",
+									"value": ""
+								},
+								{
+									"key": "invoiceNo",
+									"value": ""
+								},
+								{
+									"key": "customerName",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dmmenu For Invoice",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/invoice/dmenu?fields=companyDetail",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"invoice",
+								"dmenu"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "companyDetail"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Quotatation ",
+			"item": [
+				{
+					"name": "Get All  Quotatation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2FkOTAyOGM2MTFkYjczYThkYjY2NzAiLCJpYXQiOjE3Mzk5NjYzNjcsImV4cCI6MTc0Nzc0MjM2N30.6UQAGRCUDfa4W-VwvmDWVqYEUMbrcNY3bUMnyMUuGXk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/quotation",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"quotation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Quotation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2FkOTAyOGM2MTFkYjczYThkYjY2NzAiLCJpYXQiOjE3Mzk5NjYzNjcsImV4cCI6MTc0Nzc0MjM2N30.6UQAGRCUDfa4W-VwvmDWVqYEUMbrcNY3bUMnyMUuGXk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"companyName\": \"Tech Solutions Pvt Ltd\",\r\n  \"quotationDate\": \"2025-02-18T12:00:00Z\",\r\n  \"paymentMode\": \"upi\",\r\n  \"customerId\" : \"67d26596379b727843507993\",\r\n  \"expiryDate\" :  \"2025-04-18T12:00:00Z\",\r\n  \"notes\" : \"Test Notes\",\r\n  \"termsAndConditions\" : \"test termsAndConditions\",\r\n  \"services\": [\r\n    {\r\n      \"serviceDescription\": \"Software Development\",\r\n      \"duration\": \"6 months\",\r\n      \"serviceCharges\": 50000,\r\n      \"tax\": \"18%\",\r\n      \"taxAmount\": 9000,\r\n      \"totalAmount\": 59000\r\n    },\r\n    {\r\n      \"serviceDescription\": \"Maintenance & Support\",\r\n      \"duration\": \"1 year\",\r\n      \"serviceCharges\": 20000,\r\n      \"tax\": \"18%\",\r\n      \"taxAmount\": 3600,\r\n      \"totalAmount\": 23600\r\n    }\r\n  ],\r\n  \"discount\": \"1000\",\r\n  \"anyCharges\": 500,\r\n  \"total\": 82100,\r\n  \"status\" : \"Sent\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/quotation",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"quotation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get quotation buID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2FkOTAyOGM2MTFkYjczYThkYjY2NzAiLCJpYXQiOjE3Mzk5NjYzNjcsImV4cCI6MTc0Nzc0MjM2N30.6UQAGRCUDfa4W-VwvmDWVqYEUMbrcNY3bUMnyMUuGXk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/quotation/getById/67d2894155f16d52207c1645",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"quotation",
+								"getById",
+								"67d2894155f16d52207c1645"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter quotation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2FkOTAyOGM2MTFkYjczYThkYjY2NzAiLCJpYXQiOjE3Mzk5NjYzNjcsImV4cCI6MTc0Nzc0MjM2N30.6UQAGRCUDfa4W-VwvmDWVqYEUMbrcNY3bUMnyMUuGXk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/quotation/filter?quotationNo=&customerName=&companyName=",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"quotation",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "quotationNo",
+									"value": ""
+								},
+								{
+									"key": "customerName",
+									"value": ""
+								},
+								{
+									"key": "companyName",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment-Receipt\\",
+			"item": [
+				{
+					"name": "create PR",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2FkOTAyOGM2MTFkYjczYThkYjY2NzAiLCJpYXQiOjE3Mzk5NjYzNjcsImV4cCI6MTc0Nzc0MjM2N30.6UQAGRCUDfa4W-VwvmDWVqYEUMbrcNY3bUMnyMUuGXk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"companyName\": \"Tech Solutions Pvt Ltd\",\r\n  \"receiptDate\": \"2025-02-18T12:00:00Z\",\r\n  \"paymentMode\": \"upi\",\r\n  \"customerId\" : \"67d26596379b727843507993\",\r\n  \"amountReceived\"  : 100000,\r\n  \"receivedFullAmount\" : true,\r\n  \"invoiceDetails\": [\r\n    {\r\n      \"invoiceId\": \"67d2cbac379b727843508377\",\r\n      \"receivedAmount\": 50000,\r\n      \"invoiceAmount\": 9000,\r\n      \"balancedAmount\": 59000\r\n    },\r\n        {\r\n      \"invoiceId\": \"67d2cbac379b727843508377\",\r\n      \"receivedAmount\": 50000,\r\n      \"invoiceAmount\": 9000,\r\n      \"balancedAmount\": 59000\r\n    }\r\n  ],\r\n  \"totalBalancedAmount\": 10000,\r\n  \"totalReceivedAmount\": 50000\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/payment-receipt",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"payment-receipt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All payment-receipt",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2FkOTAyOGM2MTFkYjczYThkYjY2NzAiLCJpYXQiOjE3Mzk5NjYzNjcsImV4cCI6MTc0Nzc0MjM2N30.6UQAGRCUDfa4W-VwvmDWVqYEUMbrcNY3bUMnyMUuGXk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/payment-receipt",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"payment-receipt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ById PR",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2FkOTAyOGM2MTFkYjczYThkYjY2NzAiLCJpYXQiOjE3Mzk5NjYzNjcsImV4cCI6MTc0Nzc0MjM2N30.6UQAGRCUDfa4W-VwvmDWVqYEUMbrcNY3bUMnyMUuGXk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/payment-receipt/getById/67d2d0b8fc452cc81e5a2982",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"payment-receipt",
+								"getById",
+								"67d2d0b8fc452cc81e5a2982"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter PR",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2FkOTAyOGM2MTFkYjczYThkYjY2NzAiLCJpYXQiOjE3Mzk5NjYzNjcsImV4cCI6MTc0Nzc0MjM2N30.6UQAGRCUDfa4W-VwvmDWVqYEUMbrcNY3bUMnyMUuGXk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/payment-receipt/filter?companyName=&customerName=&receiptNo=",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"payment-receipt",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "companyName",
+									"value": ""
+								},
+								{
+									"key": "customerName",
+									"value": ""
+								},
+								{
+									"key": "receiptNo",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Markup",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"businessLicenseCompleted\": true,\r\n            \"signatureDocumentCompleted\": true,\r\n            \"bankDetailsCompleted\": false,\r\n            \"companyDetailsCompleted\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/company/markUp/676952e847828901c4be88a6",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"company",
+						"markUp",
+						"676952e847828901c4be88a6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{URL}}/api/company/locationChnagingReq",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"employeeId\" : \"67766db6087dbee47a194033\",\r\n    \"newBranch\" : \"Chennai\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/company/locationChnagingReq",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"company",
+						"locationChnagingReq"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Location req ",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "profilePhoto",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "firstName",
+							"value": "Antro",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "Lejon S",
+							"type": "text"
+						},
+						{
+							"key": "emailId",
+							"value": "lejojerry@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "dateOfBirth",
+							"value": "2003-02-28",
+							"type": "text"
+						},
+						{
+							"key": "gender",
+							"value": "Male",
+							"type": "text"
+						},
+						{
+							"key": "workType",
+							"value": "Full-time",
+							"type": "text"
+						},
+						{
+							"key": "currentAddress",
+							"value": "7/139 Anna Colony",
+							"type": "text"
+						},
+						{
+							"key": "employeeId",
+							"value": "EMP001",
+							"type": "text"
+						},
+						{
+							"key": "phoneNo",
+							"value": "7339282079",
+							"type": "text"
+						},
+						{
+							"key": "bloodGroup",
+							"value": "B-",
+							"type": "text"
+						},
+						{
+							"key": "maritalStatus",
+							"value": "Married",
+							"type": "text"
+						},
+						{
+							"key": "permanentAddress",
+							"value": "7/139 Anna Colony",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}/api/company/locationChnagingReq",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"company",
+						"locationChnagingReq"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/employee/filter?department=IT",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"employee",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "department",
+							"value": "IT"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DropMenu ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/company/dmDeatails?companyId=676952e847828901c4be88a6",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"company",
+						"dmDeatails"
+					],
+					"query": [
+						{
+							"key": "companyId",
+							"value": "676952e847828901c4be88a6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{URL}}/api/company/locationChnagingReq?department=IT&empName=LEJO S&jobCategory=On site",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/company/locationChnagingReq?department=IT&empName=LEJO S&jobCategory=On site",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"company",
+						"locationChnagingReq"
+					],
+					"query": [
+						{
+							"key": "department",
+							"value": "IT"
+						},
+						{
+							"key": "empName",
+							"value": "LEJO S"
+						},
+						{
+							"key": "jobCategory",
+							"value": "On site"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
