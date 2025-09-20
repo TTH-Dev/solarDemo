@@ -4,6 +4,7 @@ import AppError from "../../utils/AppError.js";
 import APIFeatures from "../../utils/ApiFeatures.js";
 import User from "../../models/Members/User.js";
 import XLSX from "xlsx";
+import wonCustomer from "../../models/Customer/custo.js";
 import Customer from "../../models/Customer/customer.js";
 import History from "../../models/PreSales/history.js";
 import Admin from "../../models/Admin/admin.js";
@@ -17,7 +18,6 @@ import mongoose from "mongoose";
 import BOM from "../../models/PreSales/bom.js";
 import Quation from "../../models/PreSales/quation.js";
 import sendEmail from "../../utils/email.js";
-import wonCustomer from "../../models/WonCustomer.js";
 
 export const createLeads = catchAsync(async (req, res, next) => {
   const { name, email, phoneNo, assignedTo, leadSourceType } = req.body;

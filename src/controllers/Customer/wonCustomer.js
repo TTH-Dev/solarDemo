@@ -1,7 +1,7 @@
 import catchAsync from "../../utils/catchAsync.js";
 import AppError from "../../utils/AppError.js";
 import APIFeatures from "../../utils/ApiFeatures.js";
-import wonCustomer from "../../models/WonCustomer.js";
+import wonCustomer from "../../models/Customer/custo.js";
 
 export const getAllWonCustomer = catchAsync(async (req, res, next) => {
   const limit = req.query.limit || 10;

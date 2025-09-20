@@ -62,4 +62,4 @@ wonCustomerSchema.pre("save", async function (next) {
 
 const wonCustomer = mongoose.model("wonCustomer", wonCustomerSchema);
 
-export default wonCustomer;
+export default  wonCustomer;
